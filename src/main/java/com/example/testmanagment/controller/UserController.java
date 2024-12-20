@@ -72,4 +72,13 @@ try{
         String response= userService.deleteUser(id);
         return ResponseEntity.ok(response);
     }
+    /////////////////////////////////////////////////////////////////////////////
+
+    @PutMapping("{id}")
+    public ResponseEntity<String> updateUser(@PathVariable Long id,@RequestBody User updatedUser){
+        String response= userService.updateUser(id,updatedUser);
+        return ResponseEntity.ok(response);
+    }
+
+
 }

@@ -87,5 +87,16 @@ public class UserService {
 
     ////////////////////////////////////////////////////////////////////////////////////////////
     //update user
+   public String updateUser(Long userId,User updateUser){
+        User existingUser=userRepository.findById(userId).orElse(null);
+        if(existingUser == null){
+            return "User not found";
+        }
+        existingUser.setUsername(updateUser.getUsername());
+        existingUser.setEmail(updateUser.getEmail());
+
+        userRepository.save(existingUser);
+        return "User updated";
+    }
 
 }

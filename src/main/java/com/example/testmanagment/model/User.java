@@ -16,14 +16,17 @@ public class User {
     private String password;
     @Column(name="email")
     private String email;
+    @Column(name="isdeleted")
+    private boolean isdeleted;
 
     //constructors
     public User(){}
 
-    public User(String username, String password, String email) {
+    public User(String username, String password, String email,boolean isdeleted) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.isdeleted=isdeleted;
     }
 
     //getter and setter
@@ -60,7 +63,16 @@ public class User {
         this.email = email;
     }
 
+    public boolean isIsdeleted() {
+        return isdeleted;
+    }
+
+    public void setIsdeleted(boolean isdeleted) {
+        this.isdeleted = isdeleted;
+    }
+
     //tostring
+
 
     @Override
     public String toString() {
@@ -69,6 +81,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", isdeleted=" + isdeleted +
                 '}';
     }
 }

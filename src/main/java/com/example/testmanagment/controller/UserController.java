@@ -17,7 +17,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // Kullanıcı kaydı
+    @Autowired
+    private JwtUtil jwtUtil;
+    ///////////////////////////////////////////////////////////////////////////////////////
+    // add user
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody User user) {
         try {
@@ -27,8 +30,8 @@ public class UserController {
             return ResponseEntity.status(500).body("Error registering user: " + e.getMessage());
         }
     }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //sign in
-
     @PostMapping("/signin")
     public ResponseEntity<Map<String, String>> signIn(@RequestParam String username, @RequestParam String password) {
         boolean isAuthenticated = userService.authenticateUser(username, password);
@@ -47,7 +50,26 @@ public class UserController {
 
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //validate token
+    @GetMapping("/validate")
+    public ResponseEntity<String> validateToken(@RequestParam String token) {
+try{
+        if (jwtUtil.validateToken(token, jwtUtil.extractUsername(token))) {
+            return ResponseEntity.ok("Token is valid");
+        } else {
+            return ResponseEntity.status(401).body("Token is invalid");
+        }}catch(IllegalArgumentException e){
+            return ResponseEntity.status(401).body(e.getMessage());
+        }
+    }
 
-
-
+     //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //delete
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id)
+    {
+        String response= userService.deleteUser(id);
+        return ResponseEntity.ok(response);
+    }
 }

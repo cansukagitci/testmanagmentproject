@@ -1,9 +1,11 @@
 package com.example.testmanagment.util;
+import com.example.testmanagment.exception.CustomException;
 import io.jsonwebtoken.Claims;
 
 
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import org.springframework.stereotype.Component;
 import static io.jsonwebtoken.Jwts.*;
 import io.jsonwebtoken.Jwts;
@@ -18,6 +20,7 @@ import java.util.Map;
 public class JwtUtil {
   //  private String SECRET_KEY="secret";
     private SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private long expirationTime=300000;
 
 
     //token oluşturma
@@ -45,7 +48,7 @@ public class JwtUtil {
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 5)) //
+                .setExpiration(new Date(System.currentTimeMillis() + expirationTime)) //
                 .signWith(secretKey)
                 .compact();
     }
@@ -61,11 +64,17 @@ public class JwtUtil {
 
     // Token'ı doğrulama
     private Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(secretKey)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+        try {
+            return Jwts.parser()
+                    .setSigningKey(secretKey)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        }catch (SignatureException e) {
+            throw new CustomException("Invalid or expired token."); // Hata durumunu yönetim
+        } catch (Exception e) {
+            throw new CustomException("Token error: " + e.getMessage());
+        }
     }
 
     // Token süresi kontrolü

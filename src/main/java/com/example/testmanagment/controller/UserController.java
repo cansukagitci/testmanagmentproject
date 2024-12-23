@@ -1,8 +1,10 @@
 package com.example.testmanagment.controller;
 
+import com.example.testmanagment.exception.CustomException;
 import com.example.testmanagment.model.User;
 import com.example.testmanagment.service.UserService;
 import com.example.testmanagment.util.JwtUtil;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,6 +57,9 @@ public class UserController {
     @GetMapping("/validate")
     public ResponseEntity<String> validateToken(@RequestParam String token) {
 try{
+
+
+
         if (jwtUtil.validateToken(token, jwtUtil.extractUsername(token))) {
             return ResponseEntity.ok("Token is valid");
         } else {
@@ -67,18 +72,29 @@ try{
      //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //delete
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable Long id)
+    public ResponseEntity<String> deleteUser(@PathVariable Long id, @RequestHeader("Authorization") String authorization)
     {
+        validateToken(authorization);
         String response= userService.deleteUser(id);
         return ResponseEntity.ok(response);
     }
     /////////////////////////////////////////////////////////////////////////////
 
     @PutMapping("{id}")
-    public ResponseEntity<String> updateUser(@PathVariable Long id,@RequestBody User updatedUser){
+    public ResponseEntity<String> updateUser(@PathVariable Long id,@RequestBody User updatedUser,@RequestHeader("Authorization") String authorization){
+        validateToken(authorization);
         String response= userService.updateUser(id,updatedUser);
         return ResponseEntity.ok(response);
     }
+//////////////////////////////////////////////////
+private void validateTokenControl(String authorization) {
+    // take token
+    String mytoken = authorization.replace("Bearer ", "");
 
+        // use JWT class
+        Claims claims = (Claims) validateToken(mytoken);
+     
+
+}
 
 }

@@ -2,6 +2,8 @@ package com.example.testmanagment.controller;
 
 import com.example.testmanagment.exception.CustomException;
 import com.example.testmanagment.model.User;
+
+import com.example.testmanagment.model.UserResponse;
 import com.example.testmanagment.service.UserService;
 import com.example.testmanagment.util.JwtUtil;
 import io.jsonwebtoken.Claims;
@@ -56,26 +58,28 @@ public class UserController {
     //validate token
     @GetMapping("/validate")
     public ResponseEntity<String> validateToken(@RequestParam String token) {
-try{
+        try{
 
 
 
-        if (jwtUtil.validateToken(token, jwtUtil.extractUsername(token))) {
-            return ResponseEntity.ok("Token is valid");
-        } else {
-            return ResponseEntity.status(401).body("Token is invalid");
-        }}catch(IllegalArgumentException e){
+            if (jwtUtil.validateToken(token, jwtUtil.extractUsername(token))) {
+                return ResponseEntity.ok("Token is valid");
+            } else {
+                return ResponseEntity.status(401).body("Token is invalid");
+            }}catch(IllegalArgumentException e){
             return ResponseEntity.status(401).body(e.getMessage());
         }
     }
 
-     //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //delete
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable Long id, @RequestHeader("Authorization") String authorization)
+    public ResponseEntity<UserResponse> deleteUser(@PathVariable Long id, @RequestHeader("Authorization") String authorization)
     {
         validateToken(authorization);
-        String response= userService.deleteUser(id);
+        UserResponse response=userService.deleteUser(id);
+
+
         return ResponseEntity.ok(response);
     }
     /////////////////////////////////////////////////////////////////////////////
@@ -86,15 +90,15 @@ try{
         String response= userService.updateUser(id,updatedUser);
         return ResponseEntity.ok(response);
     }
-//////////////////////////////////////////////////
-private void validateTokenControl(String authorization) {
-    // take token
-    String mytoken = authorization.replace("Bearer ", "");
+    //////////////////////////////////////////////////
+    private void validateTokenControl(String authorization) {
+        // take token
+        String mytoken = authorization.replace("Bearer ", "");
 
         // use JWT class
         Claims claims = (Claims) validateToken(mytoken);
-     
 
-}
+
+    }
 
 }

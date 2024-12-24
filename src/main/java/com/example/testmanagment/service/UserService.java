@@ -1,27 +1,25 @@
 package com.example.testmanagment.service;
 
 import com.example.testmanagment.model.User;
+import com.example.testmanagment.model.UserResponse;
 import com.example.testmanagment.repository.UserRepository;
 import com.example.testmanagment.util.JwtUtil;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.mindrot.jbcrypt.BCrypt;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @Slf4j
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-
-    private static Logger logger = LoggerFactory.getLogger(UserService.class);
     //define jwt
     @Autowired
     private JwtUtil jwtUtil;
@@ -34,76 +32,71 @@ public class UserService {
 
     ////////////////////////////////////////////////////////////////////////////////////////////
     // save user
-    public User registerUser(User user) {
-        logger.debug("started");
+    public UserResponse registerUser(User user) {
         user.setPassword(hashPassword(user.getPassword()));
-        return userRepository.save(user);
+        List<UserResponse.UserDetail> userDetails = new ArrayList<>();
+        try {
+            userRepository.save(user);
+            userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+        } catch (Exception e) {
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+        }
+        return new UserResponse(userDetails);
     }
-
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     // authenticate user
     public boolean authenticateUser(String username, String password) {
         User user = userRepository.findByUsername(username);
-        if (user != null) {
-
-            return BCrypt.checkpw(password, user.getPassword());
-        }
-        return false;
+        return user != null && BCrypt.checkpw(password, user.getPassword());
     }
+
     //////////////////////////////////////////////////////////////////////////////////////////////////
     //generate token
     public String authenticateUserToken(String username, String password) {
         User user = userRepository.findByUsername(username);
-
-        if (user != null) {
-
-
-            if (user != null && BCrypt.checkpw(password, user.getPassword())) {
-
-                return jwtUtil.generateToken(user.getId(),username);
-            }
+        if (user != null && BCrypt.checkpw(password, user.getPassword())) {
+            return jwtUtil.generateToken(user.getId(), username);
         }
         return null;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////
     //delete user
-
-    public String deleteUser(long userId) {
-
-        User user = userRepository.findById(userId).orElse(null);
-
-        if (user.isIsdeleted()) {
-            return "user already is deleted";
-
+    public UserResponse deleteUser(long userId) {
+        List<UserResponse.UserDetail> userDetails = new ArrayList<>();
+        try {
+            userRepository.deleteById(userId);
+            userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+        } catch (Exception e) {
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
         }
-        if (user != null) {
-            user.setIsdeleted(true);
-            userRepository.save(user);
-            return "User deleted successfully";
-        } else {
-            return "user not found";
-        }
-
-
-
-
-
+        return new UserResponse(userDetails);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////
     //update user
-   public String updateUser(Long userId,User updateUser){
-        User existingUser=userRepository.findById(userId).orElse(null);
-        if(existingUser == null){
+    public String updateUser(Long userId, User updateUser) {
+        User existingUser = userRepository.findById(userId).orElse(null);
+        if (existingUser == null) {
             return "User not found";
         }
         existingUser.setUsername(updateUser.getUsername());
         existingUser.setEmail(updateUser.getEmail());
-
         userRepository.save(existingUser);
         return "User updated";
     }
 
+    ////////////////////////////////////////////////////////
+    //get user
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    //////////////////////////////////////////////////////
+    //get user by id
+    public User getUserById(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        return optionalUser.orElse(null);
+    }
 }

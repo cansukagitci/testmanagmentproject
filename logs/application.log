@@ -408,3 +408,900 @@ java.lang.NullPointerException: Cannot invoke "com.example.testmanagment.model.U
 2024-12-24 16:17:45 - Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-12-24 16:17:45 - HikariPool-1 - Shutdown initiated...
 2024-12-24 16:17:45 - HikariPool-1 - Shutdown completed.
+2024-12-25 09:08:30 - Starting TestmanagmentApplication using Java 23 with PID 30740 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 09:08:30 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 09:08:31 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 09:08:31 - Finished Spring Data repository scanning in 53 ms. Found 1 JPA repository interface.
+2024-12-25 09:08:31 - Tomcat initialized with port 8081 (http)
+2024-12-25 09:08:31 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 09:08:31 - Starting service [Tomcat]
+2024-12-25 09:08:31 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 09:08:31 - Initializing Spring embedded WebApplicationContext
+2024-12-25 09:08:31 - Root WebApplicationContext: initialization completed in 1407 ms
+2024-12-25 09:08:32 - HikariPool-1 - Starting...
+2024-12-25 09:08:32 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7f8a9454
+2024-12-25 09:08:32 - HikariPool-1 - Start completed.
+2024-12-25 09:08:32 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 09:08:32 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 09:08:32 - HHH000026: Second-level cache disabled
+2024-12-25 09:08:33 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 09:08:33 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 09:08:33 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 09:08:33 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 09:08:34 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 09:08:34 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 09:08:34 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 09:08:34 - Started TestmanagmentApplication in 4.675 seconds (process running for 7.096)
+2024-12-25 09:08:42 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 09:08:42 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 09:08:42 - Completed initialization in 1 ms
+2024-12-25 09:11:19 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 09:11:19 - Graceful shutdown complete
+2024-12-25 09:11:19 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 09:11:19 - HikariPool-1 - Shutdown initiated...
+2024-12-25 09:11:19 - HikariPool-1 - Shutdown completed.
+2024-12-25 09:11:22 - Starting TestmanagmentApplication using Java 23 with PID 41840 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 09:11:22 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 09:11:23 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 09:11:23 - Finished Spring Data repository scanning in 49 ms. Found 1 JPA repository interface.
+2024-12-25 09:11:24 - Tomcat initialized with port 8081 (http)
+2024-12-25 09:11:24 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 09:11:24 - Starting service [Tomcat]
+2024-12-25 09:11:24 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 09:11:24 - Initializing Spring embedded WebApplicationContext
+2024-12-25 09:11:24 - Root WebApplicationContext: initialization completed in 1377 ms
+2024-12-25 09:11:24 - HikariPool-1 - Starting...
+2024-12-25 09:11:24 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@65eb3597
+2024-12-25 09:11:24 - HikariPool-1 - Start completed.
+2024-12-25 09:11:24 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 09:11:25 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 09:11:25 - HHH000026: Second-level cache disabled
+2024-12-25 09:11:25 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 09:11:25 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 09:11:26 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 09:11:26 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 09:11:26 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 09:11:27 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 09:11:27 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 09:11:27 - Started TestmanagmentApplication in 4.479 seconds (process running for 4.93)
+2024-12-25 09:11:27 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 09:11:27 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 09:11:27 - Completed initialization in 1 ms
+2024-12-25 09:27:13 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 09:27:13 - Graceful shutdown complete
+2024-12-25 09:27:13 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 09:27:13 - HikariPool-1 - Shutdown initiated...
+2024-12-25 09:27:13 - HikariPool-1 - Shutdown completed.
+2024-12-25 09:27:16 - Starting TestmanagmentApplication using Java 23 with PID 39032 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 09:27:16 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 09:27:17 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 09:27:17 - Finished Spring Data repository scanning in 48 ms. Found 1 JPA repository interface.
+2024-12-25 09:27:17 - Tomcat initialized with port 8081 (http)
+2024-12-25 09:27:17 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 09:27:17 - Starting service [Tomcat]
+2024-12-25 09:27:17 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 09:27:17 - Initializing Spring embedded WebApplicationContext
+2024-12-25 09:27:17 - Root WebApplicationContext: initialization completed in 1332 ms
+2024-12-25 09:27:18 - HikariPool-1 - Starting...
+2024-12-25 09:27:18 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4a50c746
+2024-12-25 09:27:18 - HikariPool-1 - Start completed.
+2024-12-25 09:27:18 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 09:27:18 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 09:27:18 - HHH000026: Second-level cache disabled
+2024-12-25 09:27:19 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 09:27:19 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 09:27:19 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 09:27:19 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 09:27:20 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 09:27:20 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 09:27:20 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 09:27:20 - Started TestmanagmentApplication in 4.501 seconds (process running for 4.95)
+2024-12-25 09:27:21 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 09:27:21 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 09:27:21 - Completed initialization in 1 ms
+2024-12-25 09:31:47 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 09:31:47 - Graceful shutdown complete
+2024-12-25 09:31:47 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 09:31:47 - HikariPool-1 - Shutdown initiated...
+2024-12-25 09:31:47 - HikariPool-1 - Shutdown completed.
+2024-12-25 09:31:50 - Starting TestmanagmentApplication using Java 23 with PID 42112 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 09:31:50 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 09:31:51 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 09:31:51 - Finished Spring Data repository scanning in 47 ms. Found 1 JPA repository interface.
+2024-12-25 09:31:52 - Tomcat initialized with port 8081 (http)
+2024-12-25 09:31:52 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 09:31:52 - Starting service [Tomcat]
+2024-12-25 09:31:52 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 09:31:52 - Initializing Spring embedded WebApplicationContext
+2024-12-25 09:31:52 - Root WebApplicationContext: initialization completed in 1334 ms
+2024-12-25 09:31:52 - HikariPool-1 - Starting...
+2024-12-25 09:31:52 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@590d6c76
+2024-12-25 09:31:52 - HikariPool-1 - Start completed.
+2024-12-25 09:31:52 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 09:31:52 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 09:31:52 - HHH000026: Second-level cache disabled
+2024-12-25 09:31:53 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 09:31:53 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 09:31:54 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 09:31:54 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 09:31:54 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 09:31:54 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 09:31:54 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 09:31:54 - Started TestmanagmentApplication in 4.468 seconds (process running for 4.936)
+2024-12-25 09:31:56 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 09:31:56 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 09:31:56 - Completed initialization in 1 ms
+2024-12-25 09:32:50 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 09:32:50 - Graceful shutdown complete
+2024-12-25 09:32:50 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 09:32:50 - HikariPool-1 - Shutdown initiated...
+2024-12-25 09:32:50 - HikariPool-1 - Shutdown completed.
+2024-12-25 09:32:53 - Starting TestmanagmentApplication using Java 23 with PID 32200 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 09:32:53 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 09:32:54 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 09:32:54 - Finished Spring Data repository scanning in 48 ms. Found 1 JPA repository interface.
+2024-12-25 09:32:54 - Tomcat initialized with port 8081 (http)
+2024-12-25 09:32:54 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 09:32:54 - Starting service [Tomcat]
+2024-12-25 09:32:54 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 09:32:54 - Initializing Spring embedded WebApplicationContext
+2024-12-25 09:32:54 - Root WebApplicationContext: initialization completed in 1305 ms
+2024-12-25 09:32:55 - HikariPool-1 - Starting...
+2024-12-25 09:32:55 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5aa76ad2
+2024-12-25 09:32:55 - HikariPool-1 - Start completed.
+2024-12-25 09:32:55 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 09:32:55 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 09:32:55 - HHH000026: Second-level cache disabled
+2024-12-25 09:32:55 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 09:32:56 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 09:32:56 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 09:32:56 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 09:32:57 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 09:32:57 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 09:32:57 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 09:32:57 - Started TestmanagmentApplication in 4.266 seconds (process running for 4.728)
+2024-12-25 09:33:01 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 09:33:01 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 09:33:01 - Completed initialization in 1 ms
+2024-12-25 09:33:32 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 09:33:33 - Graceful shutdown complete
+2024-12-25 09:33:33 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 09:33:33 - HikariPool-1 - Shutdown initiated...
+2024-12-25 09:33:33 - HikariPool-1 - Shutdown completed.
+2024-12-25 09:33:36 - Starting TestmanagmentApplication using Java 23 with PID 41908 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 09:33:36 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 09:33:36 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 09:33:36 - Finished Spring Data repository scanning in 44 ms. Found 1 JPA repository interface.
+2024-12-25 09:33:37 - Tomcat initialized with port 8081 (http)
+2024-12-25 09:33:37 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 09:33:37 - Starting service [Tomcat]
+2024-12-25 09:33:37 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 09:33:37 - Initializing Spring embedded WebApplicationContext
+2024-12-25 09:33:37 - Root WebApplicationContext: initialization completed in 1356 ms
+2024-12-25 09:33:37 - HikariPool-1 - Starting...
+2024-12-25 09:33:38 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@26e8ff8c
+2024-12-25 09:33:38 - HikariPool-1 - Start completed.
+2024-12-25 09:33:38 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 09:33:38 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 09:33:38 - HHH000026: Second-level cache disabled
+2024-12-25 09:33:38 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 09:33:38 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 09:33:39 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 09:33:39 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 09:33:39 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 09:33:40 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 09:33:40 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 09:33:40 - Started TestmanagmentApplication in 4.48 seconds (process running for 4.964)
+2024-12-25 09:33:40 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 09:33:40 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 09:33:40 - Completed initialization in 1 ms
+2024-12-25 09:34:11 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 09:34:11 - Graceful shutdown complete
+2024-12-25 09:34:11 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 09:34:11 - HikariPool-1 - Shutdown initiated...
+2024-12-25 09:34:11 - HikariPool-1 - Shutdown completed.
+2024-12-25 09:34:14 - Starting TestmanagmentApplication using Java 23 with PID 29380 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 09:34:14 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 09:34:14 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 09:34:14 - Finished Spring Data repository scanning in 45 ms. Found 1 JPA repository interface.
+2024-12-25 09:34:15 - Tomcat initialized with port 8081 (http)
+2024-12-25 09:34:15 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 09:34:15 - Starting service [Tomcat]
+2024-12-25 09:34:15 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 09:34:15 - Initializing Spring embedded WebApplicationContext
+2024-12-25 09:34:15 - Root WebApplicationContext: initialization completed in 1344 ms
+2024-12-25 09:34:15 - HikariPool-1 - Starting...
+2024-12-25 09:34:15 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@590d6c76
+2024-12-25 09:34:15 - HikariPool-1 - Start completed.
+2024-12-25 09:34:15 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 09:34:16 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 09:34:16 - HHH000026: Second-level cache disabled
+2024-12-25 09:34:16 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 09:34:16 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 09:34:17 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 09:34:17 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 09:34:17 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 09:34:17 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 09:34:17 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 09:34:17 - Started TestmanagmentApplication in 4.322 seconds (process running for 4.77)
+2024-12-25 09:34:21 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 09:34:21 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 09:34:21 - Completed initialization in 1 ms
+2024-12-25 10:06:21 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 10:06:21 - Graceful shutdown complete
+2024-12-25 10:06:21 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:06:21 - HikariPool-1 - Shutdown initiated...
+2024-12-25 10:06:21 - HikariPool-1 - Shutdown completed.
+2024-12-25 10:06:24 - Starting TestmanagmentApplication using Java 23 with PID 38748 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 10:06:24 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 10:06:25 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 10:06:25 - Finished Spring Data repository scanning in 53 ms. Found 1 JPA repository interface.
+2024-12-25 10:06:26 - Tomcat initialized with port 8081 (http)
+2024-12-25 10:06:26 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:06:26 - Starting service [Tomcat]
+2024-12-25 10:06:26 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 10:06:26 - Initializing Spring embedded WebApplicationContext
+2024-12-25 10:06:26 - Root WebApplicationContext: initialization completed in 1433 ms
+2024-12-25 10:06:26 - HikariPool-1 - Starting...
+2024-12-25 10:06:27 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@26e8ff8c
+2024-12-25 10:06:27 - HikariPool-1 - Start completed.
+2024-12-25 10:06:27 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 10:06:27 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 10:06:27 - HHH000026: Second-level cache disabled
+2024-12-25 10:06:27 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 10:06:27 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 10:06:28 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 10:06:28 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:06:28 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 10:06:29 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:06:29 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 10:06:29 - Started TestmanagmentApplication in 4.648 seconds (process running for 5.117)
+2024-12-25 10:06:42 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 10:06:42 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 10:06:42 - Completed initialization in 2 ms
+2024-12-25 10:07:28 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 10:07:28 - Graceful shutdown complete
+2024-12-25 10:07:28 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:07:28 - HikariPool-1 - Shutdown initiated...
+2024-12-25 10:07:28 - HikariPool-1 - Shutdown completed.
+2024-12-25 10:07:30 - Starting TestmanagmentApplication using Java 23 with PID 40312 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 10:07:30 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 10:07:31 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 10:07:31 - Finished Spring Data repository scanning in 49 ms. Found 1 JPA repository interface.
+2024-12-25 10:07:32 - Tomcat initialized with port 8081 (http)
+2024-12-25 10:07:32 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:07:32 - Starting service [Tomcat]
+2024-12-25 10:07:32 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 10:07:32 - Initializing Spring embedded WebApplicationContext
+2024-12-25 10:07:32 - Root WebApplicationContext: initialization completed in 1354 ms
+2024-12-25 10:07:32 - HikariPool-1 - Starting...
+2024-12-25 10:07:32 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@79ecc507
+2024-12-25 10:07:32 - HikariPool-1 - Start completed.
+2024-12-25 10:07:32 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 10:07:33 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 10:07:33 - HHH000026: Second-level cache disabled
+2024-12-25 10:07:33 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 10:07:33 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 10:07:34 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 10:07:34 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:07:34 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 10:07:34 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:07:35 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 10:07:35 - Started TestmanagmentApplication in 4.43 seconds (process running for 4.88)
+2024-12-25 10:07:41 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 10:07:41 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 10:07:41 - Completed initialization in 1 ms
+2024-12-25 10:08:05 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 10:08:05 - Graceful shutdown complete
+2024-12-25 10:08:05 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:08:05 - HikariPool-1 - Shutdown initiated...
+2024-12-25 10:08:05 - HikariPool-1 - Shutdown completed.
+2024-12-25 10:08:07 - Starting TestmanagmentApplication using Java 23 with PID 5664 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 10:08:07 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 10:08:07 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 10:08:07 - Finished Spring Data repository scanning in 48 ms. Found 1 JPA repository interface.
+2024-12-25 10:08:08 - Tomcat initialized with port 8081 (http)
+2024-12-25 10:08:08 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:08:08 - Starting service [Tomcat]
+2024-12-25 10:08:08 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 10:08:08 - Initializing Spring embedded WebApplicationContext
+2024-12-25 10:08:08 - Root WebApplicationContext: initialization completed in 1324 ms
+2024-12-25 10:08:08 - HikariPool-1 - Starting...
+2024-12-25 10:08:09 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@26e0d39c
+2024-12-25 10:08:09 - HikariPool-1 - Start completed.
+2024-12-25 10:08:09 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 10:08:09 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 10:08:09 - HHH000026: Second-level cache disabled
+2024-12-25 10:08:09 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 10:08:09 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 10:08:10 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 10:08:10 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:08:10 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 10:08:11 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:08:11 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 10:08:11 - Started TestmanagmentApplication in 4.258 seconds (process running for 4.772)
+2024-12-25 10:08:16 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 10:08:16 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 10:08:16 - Completed initialization in 1 ms
+2024-12-25 10:09:10 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 10:09:10 - Graceful shutdown complete
+2024-12-25 10:09:10 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:09:10 - HikariPool-1 - Shutdown initiated...
+2024-12-25 10:09:10 - HikariPool-1 - Shutdown completed.
+2024-12-25 10:09:13 - Starting TestmanagmentApplication using Java 23 with PID 39912 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 10:09:13 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 10:09:14 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 10:09:14 - Finished Spring Data repository scanning in 50 ms. Found 1 JPA repository interface.
+2024-12-25 10:09:15 - Tomcat initialized with port 8081 (http)
+2024-12-25 10:09:15 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:09:15 - Starting service [Tomcat]
+2024-12-25 10:09:15 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 10:09:15 - Initializing Spring embedded WebApplicationContext
+2024-12-25 10:09:15 - Root WebApplicationContext: initialization completed in 1354 ms
+2024-12-25 10:09:15 - HikariPool-1 - Starting...
+2024-12-25 10:09:15 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@38e83838
+2024-12-25 10:09:15 - HikariPool-1 - Start completed.
+2024-12-25 10:09:15 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 10:09:15 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 10:09:15 - HHH000026: Second-level cache disabled
+2024-12-25 10:09:16 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 10:09:16 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 10:09:16 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 10:09:16 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:09:17 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 10:09:17 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:09:17 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 10:09:17 - Started TestmanagmentApplication in 4.356 seconds (process running for 4.795)
+2024-12-25 10:09:18 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 10:09:18 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 10:09:18 - Completed initialization in 1 ms
+2024-12-25 10:09:26 - SQL Error: 1062, SQLState: 23000
+2024-12-25 10:09:26 - Duplicate entry 'phffoefnix1' for key 'users.username'
+2024-12-25 10:09:27 - SQL Error: 1062, SQLState: 23000
+2024-12-25 10:09:27 - Duplicate entry 'phffoefnix1' for key 'users.username'
+2024-12-25 10:10:55 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 10:10:55 - Graceful shutdown complete
+2024-12-25 10:10:55 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:10:55 - HikariPool-1 - Shutdown initiated...
+2024-12-25 10:10:55 - HikariPool-1 - Shutdown completed.
+2024-12-25 10:10:58 - Starting TestmanagmentApplication using Java 23 with PID 44304 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 10:10:58 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 10:10:58 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 10:10:58 - Finished Spring Data repository scanning in 43 ms. Found 1 JPA repository interface.
+2024-12-25 10:10:59 - Tomcat initialized with port 8081 (http)
+2024-12-25 10:10:59 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:10:59 - Starting service [Tomcat]
+2024-12-25 10:10:59 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 10:10:59 - Initializing Spring embedded WebApplicationContext
+2024-12-25 10:10:59 - Root WebApplicationContext: initialization completed in 1335 ms
+2024-12-25 10:10:59 - HikariPool-1 - Starting...
+2024-12-25 10:11:00 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5e85c21b
+2024-12-25 10:11:00 - HikariPool-1 - Start completed.
+2024-12-25 10:11:00 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 10:11:00 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 10:11:00 - HHH000026: Second-level cache disabled
+2024-12-25 10:11:00 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 10:11:00 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 10:11:01 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 10:11:01 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:11:01 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 10:11:01 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:11:01 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 10:11:01 - Started TestmanagmentApplication in 4.167 seconds (process running for 4.603)
+2024-12-25 10:18:53 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 10:18:53 - Graceful shutdown complete
+2024-12-25 10:18:53 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:18:53 - HikariPool-1 - Shutdown initiated...
+2024-12-25 10:18:53 - HikariPool-1 - Shutdown completed.
+2024-12-25 10:18:55 - Starting TestmanagmentApplication using Java 23 with PID 43888 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 10:18:55 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 10:18:56 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 10:18:56 - Finished Spring Data repository scanning in 55 ms. Found 1 JPA repository interface.
+2024-12-25 10:18:56 - Tomcat initialized with port 8081 (http)
+2024-12-25 10:18:56 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:18:56 - Starting service [Tomcat]
+2024-12-25 10:18:56 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 10:18:56 - Initializing Spring embedded WebApplicationContext
+2024-12-25 10:18:56 - Root WebApplicationContext: initialization completed in 1425 ms
+2024-12-25 10:18:56 - HikariPool-1 - Starting...
+2024-12-25 10:18:57 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4a50c746
+2024-12-25 10:18:57 - HikariPool-1 - Start completed.
+2024-12-25 10:18:57 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 10:18:57 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 10:18:57 - HHH000026: Second-level cache disabled
+2024-12-25 10:18:57 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 10:18:57 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 10:18:58 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 10:18:58 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:18:59 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 10:18:59 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:18:59 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 10:18:59 - Started TestmanagmentApplication in 4.766 seconds (process running for 5.306)
+2024-12-25 10:19:03 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 10:19:03 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 10:19:03 - Completed initialization in 1 ms
+2024-12-25 10:19:41 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 10:19:41 - Graceful shutdown complete
+2024-12-25 10:19:41 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:19:41 - HikariPool-1 - Shutdown initiated...
+2024-12-25 10:19:41 - HikariPool-1 - Shutdown completed.
+2024-12-25 10:19:44 - Starting TestmanagmentApplication using Java 23 with PID 29668 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 10:19:44 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 10:19:45 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 10:19:45 - Finished Spring Data repository scanning in 53 ms. Found 1 JPA repository interface.
+2024-12-25 10:19:45 - Tomcat initialized with port 8081 (http)
+2024-12-25 10:19:45 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:19:45 - Starting service [Tomcat]
+2024-12-25 10:19:45 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 10:19:45 - Initializing Spring embedded WebApplicationContext
+2024-12-25 10:19:45 - Root WebApplicationContext: initialization completed in 1370 ms
+2024-12-25 10:19:46 - HikariPool-1 - Starting...
+2024-12-25 10:19:46 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5aa76ad2
+2024-12-25 10:19:46 - HikariPool-1 - Start completed.
+2024-12-25 10:19:46 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 10:19:46 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 10:19:46 - HHH000026: Second-level cache disabled
+2024-12-25 10:19:46 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 10:19:47 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 10:19:47 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 10:19:47 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:19:48 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 10:19:48 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:19:48 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 10:19:48 - Started TestmanagmentApplication in 4.623 seconds (process running for 5.09)
+2024-12-25 10:19:49 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 10:19:49 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 10:19:49 - Completed initialization in 1 ms
+2024-12-25 10:19:49 - SQL Error: 1062, SQLState: 23000
+2024-12-25 10:19:49 - Duplicate entry 'phffoefnix1' for key 'users.username'
+2024-12-25 10:22:43 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 10:22:43 - Graceful shutdown complete
+2024-12-25 10:22:43 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:22:43 - HikariPool-1 - Shutdown initiated...
+2024-12-25 10:22:43 - HikariPool-1 - Shutdown completed.
+2024-12-25 10:22:46 - Starting TestmanagmentApplication using Java 23 with PID 33500 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 10:22:46 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 10:22:47 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 10:22:47 - Finished Spring Data repository scanning in 48 ms. Found 1 JPA repository interface.
+2024-12-25 10:22:48 - Tomcat initialized with port 8081 (http)
+2024-12-25 10:22:48 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:22:48 - Starting service [Tomcat]
+2024-12-25 10:22:48 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 10:22:48 - Initializing Spring embedded WebApplicationContext
+2024-12-25 10:22:48 - Root WebApplicationContext: initialization completed in 1397 ms
+2024-12-25 10:22:48 - HikariPool-1 - Starting...
+2024-12-25 10:22:48 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@72ecbcb3
+2024-12-25 10:22:48 - HikariPool-1 - Start completed.
+2024-12-25 10:22:48 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 10:22:48 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 10:22:49 - HHH000026: Second-level cache disabled
+2024-12-25 10:22:49 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 10:22:49 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 10:22:50 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 10:22:50 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:22:50 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 10:22:50 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:22:51 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 10:22:51 - Started TestmanagmentApplication in 4.46 seconds (process running for 4.901)
+2024-12-25 10:22:53 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 10:22:53 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 10:22:53 - Completed initialization in 1 ms
+2024-12-25 10:22:53 - SQL Error: 1062, SQLState: 23000
+2024-12-25 10:22:53 - Duplicate entry 'phffoefnix1' for key 'users.username'
+2024-12-25 10:23:12 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 10:23:12 - Graceful shutdown complete
+2024-12-25 10:23:12 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:23:12 - HikariPool-1 - Shutdown initiated...
+2024-12-25 10:23:12 - HikariPool-1 - Shutdown completed.
+2024-12-25 10:23:15 - Starting TestmanagmentApplication using Java 23 with PID 40380 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 10:23:15 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 10:23:15 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 10:23:16 - Finished Spring Data repository scanning in 50 ms. Found 1 JPA repository interface.
+2024-12-25 10:23:16 - Tomcat initialized with port 8081 (http)
+2024-12-25 10:23:16 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:23:16 - Starting service [Tomcat]
+2024-12-25 10:23:16 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 10:23:16 - Initializing Spring embedded WebApplicationContext
+2024-12-25 10:23:16 - Root WebApplicationContext: initialization completed in 1357 ms
+2024-12-25 10:23:16 - HikariPool-1 - Starting...
+2024-12-25 10:23:17 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4a50c746
+2024-12-25 10:23:17 - HikariPool-1 - Start completed.
+2024-12-25 10:23:17 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 10:23:17 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 10:23:17 - HHH000026: Second-level cache disabled
+2024-12-25 10:23:17 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 10:23:17 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 10:23:18 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 10:23:18 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:23:18 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 10:23:19 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:23:19 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 10:23:19 - Started TestmanagmentApplication in 4.577 seconds (process running for 5.029)
+2024-12-25 10:23:22 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 10:23:22 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 10:23:22 - Completed initialization in 1 ms
+2024-12-25 10:24:25 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 10:24:25 - Graceful shutdown complete
+2024-12-25 10:24:25 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:24:26 - HikariPool-1 - Shutdown initiated...
+2024-12-25 10:24:26 - HikariPool-1 - Shutdown completed.
+2024-12-25 10:24:29 - Starting TestmanagmentApplication using Java 23 with PID 32172 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 10:24:29 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 10:24:29 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 10:24:30 - Finished Spring Data repository scanning in 43 ms. Found 1 JPA repository interface.
+2024-12-25 10:24:30 - Tomcat initialized with port 8081 (http)
+2024-12-25 10:24:30 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:24:30 - Starting service [Tomcat]
+2024-12-25 10:24:30 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 10:24:30 - Initializing Spring embedded WebApplicationContext
+2024-12-25 10:24:30 - Root WebApplicationContext: initialization completed in 1391 ms
+2024-12-25 10:24:30 - HikariPool-1 - Starting...
+2024-12-25 10:24:31 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@39832280
+2024-12-25 10:24:31 - HikariPool-1 - Start completed.
+2024-12-25 10:24:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 10:24:31 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 10:24:31 - HHH000026: Second-level cache disabled
+2024-12-25 10:24:31 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 10:24:31 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 10:24:32 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 10:24:32 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 10:24:32 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 10:24:33 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 10:24:33 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 10:24:33 - Started TestmanagmentApplication in 4.483 seconds (process running for 4.92)
+2024-12-25 10:24:36 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 10:24:36 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 10:24:36 - Completed initialization in 1 ms
+2024-12-25 11:06:28 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 11:06:28 - Graceful shutdown complete
+2024-12-25 11:06:28 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 11:06:28 - HikariPool-1 - Shutdown initiated...
+2024-12-25 11:06:28 - HikariPool-1 - Shutdown completed.
+2024-12-25 11:06:33 - Starting TestmanagmentApplication using Java 23 with PID 38684 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 11:06:33 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 11:06:34 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 11:06:34 - Finished Spring Data repository scanning in 50 ms. Found 1 JPA repository interface.
+2024-12-25 11:06:35 - Tomcat initialized with port 8081 (http)
+2024-12-25 11:06:35 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 11:06:35 - Starting service [Tomcat]
+2024-12-25 11:06:35 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 11:06:35 - Initializing Spring embedded WebApplicationContext
+2024-12-25 11:06:35 - Root WebApplicationContext: initialization completed in 1336 ms
+2024-12-25 11:06:35 - HikariPool-1 - Starting...
+2024-12-25 11:06:35 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3c7279a5
+2024-12-25 11:06:35 - HikariPool-1 - Start completed.
+2024-12-25 11:06:35 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 11:06:35 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 11:06:35 - HHH000026: Second-level cache disabled
+2024-12-25 11:06:36 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 11:06:36 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 11:06:37 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 11:06:37 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 11:06:37 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 11:06:38 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 11:06:38 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 11:06:38 - Started TestmanagmentApplication in 4.549 seconds (process running for 5.449)
+2024-12-25 11:06:39 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 11:06:39 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 11:06:39 - Completed initialization in 1 ms
+2024-12-25 11:13:47 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 11:13:47 - Graceful shutdown complete
+2024-12-25 11:13:47 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 11:13:47 - HikariPool-1 - Shutdown initiated...
+2024-12-25 11:13:47 - HikariPool-1 - Shutdown completed.
+2024-12-25 11:14:21 - Starting TestmanagmentApplication using Java 23 with PID 29616 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 11:14:21 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 11:14:22 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 11:14:22 - Finished Spring Data repository scanning in 45 ms. Found 1 JPA repository interface.
+2024-12-25 11:14:22 - Tomcat initialized with port 8081 (http)
+2024-12-25 11:14:22 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 11:14:22 - Starting service [Tomcat]
+2024-12-25 11:14:22 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 11:14:23 - Initializing Spring embedded WebApplicationContext
+2024-12-25 11:14:23 - Root WebApplicationContext: initialization completed in 1402 ms
+2024-12-25 11:14:23 - HikariPool-1 - Starting...
+2024-12-25 11:14:23 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6ef2f7ad
+2024-12-25 11:14:23 - HikariPool-1 - Start completed.
+2024-12-25 11:14:23 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 11:14:23 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 11:14:23 - HHH000026: Second-level cache disabled
+2024-12-25 11:14:24 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 11:14:24 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 11:14:24 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 11:14:24 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 11:14:25 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 11:14:25 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 11:14:25 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 11:14:25 - Started TestmanagmentApplication in 4.511 seconds (process running for 4.948)
+2024-12-25 11:14:27 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 11:14:27 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 11:14:27 - Completed initialization in 1 ms
+2024-12-25 11:16:54 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 11:16:54 - Graceful shutdown complete
+2024-12-25 11:16:54 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 11:16:54 - HikariPool-1 - Shutdown initiated...
+2024-12-25 11:16:54 - HikariPool-1 - Shutdown completed.
+2024-12-25 11:16:57 - Starting TestmanagmentApplication using Java 23 with PID 30068 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 11:16:57 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 11:16:58 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 11:16:58 - Finished Spring Data repository scanning in 53 ms. Found 1 JPA repository interface.
+2024-12-25 11:16:58 - Tomcat initialized with port 8081 (http)
+2024-12-25 11:16:58 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 11:16:58 - Starting service [Tomcat]
+2024-12-25 11:16:58 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 11:16:58 - Initializing Spring embedded WebApplicationContext
+2024-12-25 11:16:58 - Root WebApplicationContext: initialization completed in 1327 ms
+2024-12-25 11:16:59 - HikariPool-1 - Starting...
+2024-12-25 11:16:59 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5e85c21b
+2024-12-25 11:16:59 - HikariPool-1 - Start completed.
+2024-12-25 11:16:59 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 11:16:59 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 11:16:59 - HHH000026: Second-level cache disabled
+2024-12-25 11:16:59 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 11:17:00 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 11:17:00 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 11:17:00 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 11:17:01 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 11:17:01 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 11:17:01 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 11:17:01 - Started TestmanagmentApplication in 4.368 seconds (process running for 4.801)
+2024-12-25 11:17:13 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 11:17:13 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 11:17:13 - Completed initialization in 1 ms
+2024-12-25 11:18:24 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 11:18:24 - Graceful shutdown complete
+2024-12-25 11:18:24 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 11:18:24 - HikariPool-1 - Shutdown initiated...
+2024-12-25 11:18:24 - HikariPool-1 - Shutdown completed.
+2024-12-25 11:18:27 - Starting TestmanagmentApplication using Java 23 with PID 44904 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 11:18:27 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 11:18:27 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 11:18:28 - Finished Spring Data repository scanning in 45 ms. Found 1 JPA repository interface.
+2024-12-25 11:18:28 - Tomcat initialized with port 8081 (http)
+2024-12-25 11:18:28 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 11:18:28 - Starting service [Tomcat]
+2024-12-25 11:18:28 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 11:18:28 - Initializing Spring embedded WebApplicationContext
+2024-12-25 11:18:28 - Root WebApplicationContext: initialization completed in 1346 ms
+2024-12-25 11:18:28 - HikariPool-1 - Starting...
+2024-12-25 11:18:29 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@f882465
+2024-12-25 11:18:29 - HikariPool-1 - Start completed.
+2024-12-25 11:18:29 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 11:18:29 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 11:18:29 - HHH000026: Second-level cache disabled
+2024-12-25 11:18:29 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 11:18:29 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 11:18:30 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 11:18:30 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 11:18:30 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 11:18:31 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 11:18:31 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 11:18:31 - Started TestmanagmentApplication in 4.539 seconds (process running for 4.996)
+2024-12-25 11:18:39 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 11:18:39 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 11:18:39 - Completed initialization in 2 ms
+2024-12-25 11:22:20 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 11:22:20 - Graceful shutdown complete
+2024-12-25 11:22:20 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 11:22:20 - HikariPool-1 - Shutdown initiated...
+2024-12-25 11:22:20 - HikariPool-1 - Shutdown completed.
+2024-12-25 11:22:23 - Starting TestmanagmentApplication using Java 23 with PID 40504 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 11:22:23 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 11:22:24 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 11:22:24 - Finished Spring Data repository scanning in 49 ms. Found 1 JPA repository interface.
+2024-12-25 11:22:24 - Tomcat initialized with port 8081 (http)
+2024-12-25 11:22:24 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 11:22:24 - Starting service [Tomcat]
+2024-12-25 11:22:24 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 11:22:24 - Initializing Spring embedded WebApplicationContext
+2024-12-25 11:22:24 - Root WebApplicationContext: initialization completed in 1305 ms
+2024-12-25 11:22:25 - HikariPool-1 - Starting...
+2024-12-25 11:22:25 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6df4af5
+2024-12-25 11:22:25 - HikariPool-1 - Start completed.
+2024-12-25 11:22:25 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 11:22:25 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 11:22:25 - HHH000026: Second-level cache disabled
+2024-12-25 11:22:25 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 11:22:26 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 11:22:26 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 11:22:26 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 11:22:27 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 11:22:27 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 11:22:27 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 11:22:27 - Started TestmanagmentApplication in 4.466 seconds (process running for 4.898)
+2024-12-25 11:22:29 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 11:22:29 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 11:22:29 - Completed initialization in 1 ms
+2024-12-25 11:23:32 - Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-25 11:23:32 - Graceful shutdown complete
+2024-12-25 11:23:32 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 11:23:32 - HikariPool-1 - Shutdown initiated...
+2024-12-25 11:23:32 - HikariPool-1 - Shutdown completed.
+2024-12-25 11:23:35 - Starting TestmanagmentApplication using Java 23 with PID 44464 (C:\Users\ARGE\Desktop\testmanagment\target\classes started by ARGE in C:\Users\ARGE\Desktop\testmanagment)
+2024-12-25 11:23:35 - No active profile set, falling back to 1 default profile: "default"
+2024-12-25 11:23:36 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-25 11:23:36 - Finished Spring Data repository scanning in 49 ms. Found 1 JPA repository interface.
+2024-12-25 11:23:36 - Tomcat initialized with port 8081 (http)
+2024-12-25 11:23:36 - Initializing ProtocolHandler ["http-nio-8081"]
+2024-12-25 11:23:36 - Starting service [Tomcat]
+2024-12-25 11:23:36 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-25 11:23:36 - Initializing Spring embedded WebApplicationContext
+2024-12-25 11:23:36 - Root WebApplicationContext: initialization completed in 1360 ms
+2024-12-25 11:23:36 - HikariPool-1 - Starting...
+2024-12-25 11:23:37 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6ef2f7ad
+2024-12-25 11:23:37 - HikariPool-1 - Start completed.
+2024-12-25 11:23:37 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-25 11:23:37 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2024-12-25 11:23:37 - HHH000026: Second-level cache disabled
+2024-12-25 11:23:37 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-25 11:23:37 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.37
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2024-12-25 11:23:38 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-25 11:23:38 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-25 11:23:38 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-25 11:23:39 - Starting ProtocolHandler ["http-nio-8081"]
+2024-12-25 11:23:39 - Tomcat started on port 8081 (http) with context path '/'
+2024-12-25 11:23:39 - Started TestmanagmentApplication in 4.486 seconds (process running for 4.928)
+2024-12-25 11:23:51 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-25 11:23:51 - Initializing Servlet 'dispatcherServlet'
+2024-12-25 11:23:51 - Completed initialization in 1 ms

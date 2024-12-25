@@ -26,13 +26,14 @@ public class UserController {
     ///////////////////////////////////////////////////////////////////////////////////////
     // add user
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody User user) {
-        try {
-            userService.registerUser(user);
-            return ResponseEntity.ok("User registered successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error registering user: " + e.getMessage());
-        }
+    public ResponseEntity<UserResponse> register(@RequestBody User user) {
+
+      UserResponse response=userService.registerUser(user);
+        return ResponseEntity.ok(response);
+
+
+
+
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //sign in
@@ -85,9 +86,9 @@ public class UserController {
     /////////////////////////////////////////////////////////////////////////////
 
     @PutMapping("{id}")
-    public ResponseEntity<String> updateUser(@PathVariable Long id,@RequestBody User updatedUser,@RequestHeader("Authorization") String authorization){
+    public ResponseEntity<UserResponse> updateUser(@PathVariable Long id,@RequestBody User updatedUser,@RequestHeader("Authorization") String authorization){
         validateToken(authorization);
-        String response= userService.updateUser(id,updatedUser);
+        UserResponse response= userService.updateUser(id,updatedUser);
         return ResponseEntity.ok(response);
     }
     //////////////////////////////////////////////////

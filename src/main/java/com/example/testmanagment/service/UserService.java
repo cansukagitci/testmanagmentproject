@@ -25,6 +25,9 @@ public class UserService {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @Autowired
+    private LogService logService;
+
     //////////////////////////////////////////////////////////////////////////////////////
     // hash password
     private String hashPassword(String plainPassword) {
@@ -40,23 +43,30 @@ public class UserService {
 
         // Duplication control for user
         if (userRepository.findByUsername(user.getUsername()) != null) {
+            logService.logError("Duplicate user : " + user.getUsername());
             userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: User already exists"));
+
             return new UserResponse(userDetails);
         }
 
         // Duplication control for email
         if (userRepository.findByEmail(user.getEmail()) != null) {
+            logService.logError("Duplicate email : " + user.getEmail());
             userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: E-Mail is already exist!"));
+
             return new UserResponse(userDetails);
+
         }
       //empty user control
         if (user.getUsername() == null || user.getUsername().trim().isEmpty()) {
+            logService.logError("Empty user");
             userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Username cannot be empty"));
             return new UserResponse(userDetails);
         }
 
         //empty email control
         if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
+            logService.logError("Empty email");
             userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Email cannot be empty"));
             return new UserResponse(userDetails);
         }
@@ -66,10 +76,12 @@ public class UserService {
 
 
             userRepository.save(user);
+            logService.logInfo("User registered successfully: " + user.getUsername());
             userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
 
 
         } catch (Exception e) {
+            logService.logError("Service Error");
             userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
         }
         return new UserResponse(userDetails);
@@ -79,6 +91,7 @@ public class UserService {
     // authenticate user
     public boolean authenticateUser(String username, String password) {
         User user = userRepository.findByUsername(username);
+        logService.logInfo("User authenticate successfully: " + user.getUsername());
         return user != null && BCrypt.checkpw(password, user.getPassword());
     }
 
@@ -106,11 +119,13 @@ public class UserService {
                 }else {
                     user.setIsdeleted(true);
                     userRepository.save(user);
+                    logService.logInfo("User deleted successfully: " + user.getUsername());
                     userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
 
                 }
             }else {
-                userDetails.add(new UserResponse.UserDetail(0, true, "User boş olamaz"));
+                logService.logError("Empty user");
+                userDetails.add(new UserResponse.UserDetail(0, true, "User must not be null"));
 
             }
 
@@ -119,6 +134,7 @@ public class UserService {
 
 
         } catch (Exception e) {
+            logService.logError("Service Error");
             userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
         }
         return new UserResponse(userDetails);
@@ -153,6 +169,7 @@ public class UserService {
                 user.setPassword(updateUser.getPassword());
                 user.setEmail(updateUser.getEmail());
                 userRepository.save(user);
+                logService.logInfo("User updated successfully: " + user.getUsername());
                 userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
 
 

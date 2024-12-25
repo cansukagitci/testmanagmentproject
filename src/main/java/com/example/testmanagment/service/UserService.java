@@ -40,7 +40,7 @@ public class UserService {
 
         // Duplication control for user
         if (userRepository.findByUsername(user.getUsername()) != null) {
-            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: User is already exist!"));
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: User already exists"));
             return new UserResponse(userDetails);
         }
 
@@ -130,6 +130,18 @@ public class UserService {
         Optional<User> existingUser = userRepository.findById(userId);
         List<UserResponse.UserDetail> userDetails = new ArrayList<>();
         updateUser.setPassword(hashPassword(updateUser.getPassword()));
+
+        //empty user control
+        if (updateUser.getUsername() == null || updateUser.getUsername().trim().isEmpty()) {
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: User must not be null"));
+            return new UserResponse(userDetails);
+        }
+
+        if (existingUser.isEmpty()) {
+            // Kullanıcı veritabanında yoksa hata mesajı ekle
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: User not found"));
+            return new UserResponse(userDetails); // Hata mesajı ile yanıt döndür
+        }
         try{
             User user=existingUser.get();
             if(existingUser.isEmpty()) {

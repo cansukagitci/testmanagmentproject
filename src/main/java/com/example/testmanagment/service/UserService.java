@@ -115,6 +115,7 @@ public class UserService {
             if(user != null)
             {
                 if(user.isIsdeleted()){
+                    logService.logError("User isalreadt deleted " + user.getUsername());
                     userDetails.add(new UserResponse.UserDetail(0, true, "user already is deleted"));
                 }else {
                     user.setIsdeleted(true);
@@ -149,18 +150,21 @@ public class UserService {
 
         //empty user control
         if (updateUser.getUsername() == null || updateUser.getUsername().trim().isEmpty()) {
+            logService.logError("Empty user ");
             userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: User must not be null"));
             return new UserResponse(userDetails);
         }
 
         if (existingUser.isEmpty()) {
-            // Kullanıcı veritabanında yoksa hata mesajı ekle
+
+            logService.logError("User not found : " + updateUser.getUsername());
             userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: User not found"));
             return new UserResponse(userDetails); // Hata mesajı ile yanıt döndür
         }
         try{
             User user=existingUser.get();
             if(existingUser.isEmpty()) {
+                logService.logError("User must not be null : " + updateUser.getUsername());
                 userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_FAILURE: User must not be null"));
             }else {
 
@@ -178,7 +182,7 @@ public class UserService {
 
 
         }catch (Exception e){
-
+            logService.logError("Service Error ");
             userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
         }
         return new UserResponse(userDetails);

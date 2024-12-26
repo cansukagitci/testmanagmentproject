@@ -115,12 +115,13 @@ public class UserService {
             if(user != null)
             {
                 if(user.isIsdeleted()){
-                    logService.logError("User isalreadt deleted " + user.getUsername());
+                    logService.logError("User isalready deleted " + user.getUsername());
                     userDetails.add(new UserResponse.UserDetail(0, true, "user already is deleted"));
                 }else {
                     user.setIsdeleted(true);
-                    userRepository.save(user);
                     logService.logInfo("User deleted successfully: " + user.getUsername());
+                    userRepository.save(user);
+
                     userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
 
                 }

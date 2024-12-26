@@ -17,9 +17,15 @@ public class Project {
     @Column(name="description")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name="user_id")
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="user_id", nullable = false)
     private User user;
+
+
+
+
 
     @Column(name="label")
     private String label;
@@ -33,7 +39,6 @@ public class Project {
         this.user = user;
         this.label = label;
     }
-
 
     //getter and setter
 
@@ -77,9 +82,6 @@ public class Project {
     public void setLabel(String label) {
         this.label = label;
     }
-
-
-    //tostring
 
     @Override
     public String toString() {

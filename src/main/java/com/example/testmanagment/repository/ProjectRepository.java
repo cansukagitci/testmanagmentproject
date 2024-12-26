@@ -7,5 +7,6 @@ import org.springframework.stereotype.Service;
 
 
 public interface ProjectRepository extends JpaRepository<Project,Long> {
+    Project findByNameAndUserId(String name, Long userId);
 
 }

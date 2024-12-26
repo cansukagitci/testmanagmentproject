@@ -38,22 +38,31 @@ public class ProjectService {
 
         List<UserResponse.UserDetail> userDetails = new ArrayList<>();
 
-
+       //user not found
         if (optionalUser.isEmpty()) {
             userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: User not found"));
             return new UserResponse(userDetails);
         }
 
-        // Kullanıcıyı al
+        //control duplicate
+        Project existingProject = projectRepository.findByNameAndUserId(projectDto.getName(), projectDto.getUserId());
+        if (existingProject != null) {
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Project name already exists for this user"));
+            return new UserResponse(userDetails);
+        }
+
+
+
+
+
         User user = optionalUser.get();
         System.out.println("User ID: " + user.getId());
 
-        // Yeni proje nesnesi oluştur
+        // create project object
         Project project = new Project();
         project.setName(projectDto.getName());
         project.setDescription(projectDto.getDescription());
-
-        project.setUser(user); // Kullanıcıyı ata
+        project.setUser(user);
         project.setLabel(projectDto.getLabel());
 
 

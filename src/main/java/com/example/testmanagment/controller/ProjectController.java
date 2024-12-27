@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/projects")
 public class ProjectController {
@@ -24,10 +27,14 @@ public class ProjectController {
     private ProjectService projectService;
 
 
-
-    @PostMapping("/add")
+       @PostMapping("/add")
     public ResponseEntity<UserResponse> addProject(@RequestBody ProjectDto projectDto) {
 
+           if (projectDto.getUserId() == null) {
+               List<UserResponse.UserDetail> details = new ArrayList<>();
+               details.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: User ID must not be null"));
+               return ResponseEntity.badRequest().body(new UserResponse(details)); // Hata mesajını içeren yanıt
+           }
 
 
 

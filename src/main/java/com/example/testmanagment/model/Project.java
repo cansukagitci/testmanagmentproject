@@ -30,14 +30,18 @@ public class Project {
     @Column(name="label")
     private String label;
 
+    @Column(name="isdeleted")
+    private boolean isdeleted;
+
     //define constructor
     public Project(){}
 
-    public Project(String name, String description, User user, String label) {
+    public Project(String name, String description, User user, String label, boolean isdeleted) {
         this.name = name;
         this.description = description;
         this.user = user;
         this.label = label;
+        this.isdeleted = isdeleted;
     }
 
     //getter and setter
@@ -83,6 +87,18 @@ public class Project {
         this.label = label;
     }
 
+    public boolean isIsdeleted() {
+        return isdeleted;
+    }
+
+    public void setIsdeleted(boolean isdeleted) {
+        this.isdeleted = isdeleted;
+    }
+
+
+    //tostring
+
+
     @Override
     public String toString() {
         return "Project{" +
@@ -91,6 +107,7 @@ public class Project {
                 ", description='" + description + '\'' +
                 ", user=" + user +
                 ", label='" + label + '\'' +
+                ", isdeleted=" + isdeleted +
                 '}';
     }
 }

@@ -5,20 +5,20 @@ public class ProjectDto {
     private String name;              // Projenin adı
     private String description;       // Projenin açıklaması
     private Long userId;              // Projeyi oluşturan kullanıcının ID'si
-    private String label;
+    private String label;  //proje label
+    private boolean isdeleted;  //silme
 
     // Default constructor
     public ProjectDto() {}
 
-    public ProjectDto(String name, String description, Long userId, String label) {
+    public ProjectDto(String name, String description, Long userId, String label,boolean isdeleted) {
 
         this.name = name;
         this.description = description;
         this.userId = userId;
         this.label = label;
+        this.isdeleted=isdeleted;
     }
-
-
 
     public String getName() {
         return name;
@@ -50,5 +50,13 @@ public class ProjectDto {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    public boolean isIsdeleted() {
+        return isdeleted;
+    }
+
+    public void setIsdeleted(boolean isdeleted) {
+        this.isdeleted = isdeleted;
     }
 }

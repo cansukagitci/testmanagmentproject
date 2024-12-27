@@ -11,10 +11,7 @@ import com.example.testmanagment.service.UserService;
 import com.example.testmanagment.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +22,35 @@ public class ProjectController {
 
     @Autowired
     private ProjectService projectService;
+    //define jwt
+    @Autowired
+    private JwtUtil jwtUtil;
+
+
+    //validate token
+    @GetMapping("/validate")
+    public ResponseEntity<String> validateTokenProject(@RequestParam String token) {
+        try{
+
+
+
+            if (jwtUtil.validateToken(token, jwtUtil.extractUsername(token))) {
+                return ResponseEntity.ok("Token is valid");
+            } else {
+                return ResponseEntity.status(401).body("Token is invalid");
+            }}catch(IllegalArgumentException e){
+            return ResponseEntity.status(401).body(e.getMessage());
+        }
+    }
+
+
+
 
 
        @PostMapping("/add")
-    public ResponseEntity<UserResponse> addProject(@RequestBody ProjectDto projectDto) {
+    public ResponseEntity<UserResponse> addProject(@RequestBody ProjectDto projectDto,@RequestHeader("Authorization") String authorization) {
 
+           validateTokenProject(authorization);
            if (projectDto.getUserId() == null) {
                List<UserResponse.UserDetail> details = new ArrayList<>();
                details.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: User ID must not be null"));

@@ -17,15 +17,9 @@ public class Project {
     @Column(name="description")
     private String description;
 
-
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id", nullable = false)
     private User user;
-
-
-
-
 
     @Column(name="label")
     private String label;

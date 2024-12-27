@@ -64,6 +64,11 @@ public class UserController {
 
 
             if (jwtUtil.validateToken(token, jwtUtil.extractUsername(token))) {
+
+                if (jwtUtil.isTokenExpired(token)) {
+                    return ResponseEntity.status(401).body("Token is expired");
+                }
+
                 return ResponseEntity.ok("Token is valid");
             } else {
                 return ResponseEntity.status(401).body("Token is invalid");

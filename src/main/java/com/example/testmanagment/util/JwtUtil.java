@@ -78,7 +78,7 @@ public class JwtUtil {
     }
 
     // Token süresi kontrolü
-    private Boolean isTokenExpired(String token) {
+    public Boolean isTokenExpired(String token) {
         return extractAllClaims(token).getExpiration().before(new Date());
     }
 

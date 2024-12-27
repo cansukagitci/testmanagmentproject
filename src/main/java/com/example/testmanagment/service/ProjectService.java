@@ -99,7 +99,51 @@ public class ProjectService {
         return new UserResponse(userDetails);
 
 
-
-
     }
+
+////////////////////////////////////////////////////////////////////
+//delete user
+public UserResponse deleteProject(long projectId) {
+    Optional<Project> deleteProject =projectRepository.findById(projectId);
+    List<UserResponse.UserDetail> userDetails = new ArrayList<>();
+
+
+
+
+    try {
+        Project project=deleteProject.get();
+        if(project != null)
+        {
+            if(project.isIsdeleted()){
+                logService.logError("Project isalready deleted " + project.getName());
+                userDetails.add(new UserResponse.UserDetail(0, true, "Project already is deleted"));
+            }else {
+                project.setIsdeleted(true);
+                logService.logInfo("Project deleted successfully: " + project.getName());
+                projectRepository.save(project);
+
+                userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+
+            }
+        }else {
+            logService.logError("Empty user");
+            userDetails.add(new UserResponse.UserDetail(0, true, "Project must not be null"));
+
+        }
+
+
+
+
+
+    } catch (Exception e) {
+        logService.logError("Service Error");
+        userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+    }
+    return new UserResponse(userDetails);
+}
+
+
+
+
+
 }

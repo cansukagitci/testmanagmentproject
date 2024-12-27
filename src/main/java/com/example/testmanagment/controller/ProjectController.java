@@ -34,7 +34,12 @@ public class ProjectController {
 
 
 
+
+
             if (jwtUtil.validateToken(token, jwtUtil.extractUsername(token))) {
+                if (jwtUtil.isTokenExpired(token)) {
+                    return ResponseEntity.status(401).body("Token is expired");
+                }
                 return ResponseEntity.ok("Token is valid");
             } else {
                 return ResponseEntity.status(401).body("Token is invalid");
@@ -47,7 +52,7 @@ public class ProjectController {
 
 
 
-       @PostMapping("/add")
+    @PostMapping("/add")
     public ResponseEntity<UserResponse> addProject(@RequestBody ProjectDto projectDto,@RequestHeader("Authorization") String authorization) {
 
            validateTokenProject(authorization);
@@ -66,6 +71,20 @@ public class ProjectController {
 
 
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //delete
+    @DeleteMapping("{id}")
+    public ResponseEntity<UserResponse> deleteProject(@PathVariable Long id, @RequestHeader("Authorization") String authorization)
+    {
+        validateTokenProject(authorization);
+        UserResponse response=projectService.deleteProject(id);
+
+
+        return ResponseEntity.ok(response);
+    }
+    /////////////////////////////////////////////////////////////////////////////
+
 
 
 }

@@ -6,11 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ProjectDto {
-                    // Proje ID'si (opsiyonel: zaten veritabanında var ise)
-    private String name;              // Projenin adı
-    private String description;       // Projenin açıklaması
-     //proje label
-    private boolean isdeleted;  //silme
+
+    private String name;
+    private String description;
+    private boolean isdeleted;
 
     // Default constructor
     public ProjectDto() {}

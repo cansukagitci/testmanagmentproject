@@ -2,6 +2,7 @@ package com.example.testmanagment.controller;
 
 
 import com.example.testmanagment.dto.ProjectDto;
+import com.example.testmanagment.dto.ProjecttoLabelDTO;
 import com.example.testmanagment.model.Project;
 import com.example.testmanagment.model.User;
 import com.example.testmanagment.model.UserResponse;
@@ -78,7 +79,27 @@ public class ProjectController {
         return ResponseEntity.ok(response);
     }
     /////////////////////////////////////////////////////////////////////////////
+   //assign label
 
+  /*  @PostMapping("/{projectId}/assign-label/{labelId}")
+    public ResponseEntity<UserResponse> assignLabelToProject(@PathVariable Long projectId, @PathVariable Long labelId,@RequestHeader("Authorization") String authorization) {
+        validateTokenProject(authorization);
 
+        UserResponse response=projectService.assignPTL(projectId,labelId);
+        return ResponseEntity.ok(response);
+
+    }*/
+
+    @PostMapping("/assign-label") // Uygun Endpoint
+    public ResponseEntity<UserResponse> assignLabelToProject(
+            @RequestBody ProjecttoLabelDTO projectToLabelDto,
+            @RequestHeader("Authorization") String authorization) {
+
+        validateTokenProject(authorization); // Token kontrolü
+
+        UserResponse response = projectService.assignPTL(projectToLabelDto); // Servisteki metodu çağır
+
+        return ResponseEntity.ok(response); // Başarı yanıtı döndür
+    }
 
 }

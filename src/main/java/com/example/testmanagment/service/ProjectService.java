@@ -2,17 +2,16 @@ package com.example.testmanagment.service;
 
 import com.example.testmanagment.dto.ProjectDto;
 import com.example.testmanagment.exception.CustomException;
-import com.example.testmanagment.model.Label;
-import com.example.testmanagment.model.Project;
-import com.example.testmanagment.model.User;
-import com.example.testmanagment.model.UserResponse;
+import com.example.testmanagment.model.*;
 import com.example.testmanagment.repository.LabelRepository;
 import com.example.testmanagment.repository.ProjectRepository;
+import com.example.testmanagment.repository.ProjectToLabelRepository;
 import com.example.testmanagment.repository.UserRepository;
 import com.example.testmanagment.util.JwtUtil;
 import jakarta.servlet.http.PushBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.testmanagment.dto.ProjecttoLabelDTO;
 
 import java.util.*;
 
@@ -34,6 +33,10 @@ public class ProjectService {
 
     @Autowired
     private LabelRepository labelRepository;
+
+
+    @Autowired
+    private ProjectToLabelRepository projectToLabelRepository;
 
     private void validateLabel(Long labelId) {
         Optional<Label> optionalLabel = labelRepository.findById(labelId);
@@ -150,8 +153,71 @@ public UserResponse deleteProject(long projectId) {
     return new UserResponse(userDetails);
 }
 
+///////////////////////////////////////////////////////////////////////
+//assign label to project
+
+  /*  public UserResponse assignPTL(long projectId,long labelId){
+        Optional<Project> optionalProject = projectRepository.findById(projectId);
+        List<UserResponse.UserDetail> userDetails = new ArrayList<>();
+
+        if (!optionalProject.isPresent()) {
+            throw new RuntimeException("Project not found; ID: " + projectId);
+        }
+
+        Optional<Label> optionalLabel = labelRepository.findById(labelId);
+        if (!optionalLabel.isPresent()) {
+            throw new RuntimeException("Label not found; ID: " + labelId);
+        }
+
+        ProjecttoLabel ref=new ProjecttoLabel();
+
+        ref.setProject(optionalProject.get());
+        ref.setLabel(optionalLabel.get());
+
+        System.out.println(optionalProject.get());
 
 
+        try {
+            projectToLabelRepository.save(ref);
+            logService.logInfo("Assign Label added successfully: ");
+            userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+        }catch (Exception e){
+            logService.logError("Service Error");
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+
+        }
+        return new UserResponse(userDetails);
+    }*/
+
+    public UserResponse assignPTL(ProjecttoLabelDTO projectToLabelDto) {
+        List<Long> labelIds = projectToLabelDto.getLabelId();
+        List<UserResponse.UserDetail> userDetails = new ArrayList<>();
+
+        // Projeyi kontrol et
+        Optional<Project> optionalProject = projectRepository.findById(projectToLabelDto.getProjectId());
+        if (!optionalProject.isPresent()) {
+            throw new RuntimeException("Project not found; ID: " + projectToLabelDto.getProjectId());
+        }
+
+        // İlişki oluşturma işlemi
+        for (Long labelId : labelIds) {
+            Optional<Label> optionalLabel = labelRepository.findById(labelId);
+            if (!optionalLabel.isPresent()) {
+                throw new RuntimeException("Label not found; ID: " + labelId);
+            }
+
+
+            ProjecttoLabel ref = new ProjecttoLabel();
+            ref.setProject(optionalProject.get());
+            ref.setLabel(optionalLabel.get());
+
+            projectToLabelRepository.save(ref); // İlişkiyi kaydet
+            userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+        }
+
+        return new UserResponse(userDetails);
+
+    }
 
 
 }

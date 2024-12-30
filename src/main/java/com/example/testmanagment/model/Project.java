@@ -21,8 +21,6 @@ public class Project {
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 
-    @Column(name="label")
-    private String label;
 
     @Column(name="isdeleted")
     private boolean isdeleted;

@@ -8,6 +8,7 @@ public class Label {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name="labelname")
     private String labelName;
@@ -31,6 +32,13 @@ public class Label {
 
     //getter and setter
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getLabelName() {
         return labelName;
@@ -56,12 +64,15 @@ public class Label {
         this.labelColor = labelColor;
     }
 
+
     //toString
+
 
     @Override
     public String toString() {
         return "Label{" +
-                "labelName='" + labelName + '\'' +
+                "id=" + id +
+                ", labelName='" + labelName + '\'' +
                 ", labelDescription='" + labelDescription + '\'' +
                 ", labelColor='" + labelColor + '\'' +
                 '}';

@@ -4,6 +4,9 @@ package com.example.testmanagment.model;
 import jakarta.persistence.*;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "projects")
 public class Project {
@@ -17,9 +20,10 @@ public class Project {
     @Column(name="description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id", nullable = false)
-    private User user;
+
+
+
+
 
 
     @Column(name="isdeleted")
@@ -28,11 +32,10 @@ public class Project {
     //define constructor
     public Project(){}
 
-    public Project(String name, String description, User user, String label, boolean isdeleted) {
+    public Project(String name, String description,  boolean isdeleted) {
         this.name = name;
         this.description = description;
-        this.user = user;
-        this.label = label;
+
         this.isdeleted = isdeleted;
     }
 
@@ -63,21 +66,7 @@ public class Project {
         this.description = description;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
 
     public boolean isIsdeleted() {
         return isdeleted;
@@ -88,7 +77,6 @@ public class Project {
     }
 
 
-    //tostring
 
 
     @Override
@@ -97,8 +85,6 @@ public class Project {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", user=" + user +
-                ", label='" + label + '\'' +
                 ", isdeleted=" + isdeleted +
                 '}';
     }

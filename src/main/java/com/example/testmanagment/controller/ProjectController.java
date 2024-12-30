@@ -56,12 +56,6 @@ public class ProjectController {
     public ResponseEntity<UserResponse> addProject(@RequestBody ProjectDto projectDto,@RequestHeader("Authorization") String authorization) {
 
            validateTokenProject(authorization);
-           if (projectDto.getUserId() == null) {
-               List<UserResponse.UserDetail> details = new ArrayList<>();
-               details.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: User ID must not be null"));
-               return ResponseEntity.badRequest().body(new UserResponse(details)); // Hata mesajını içeren yanıt
-           }
-
 
 
         UserResponse response=projectService.addProject(projectDto);

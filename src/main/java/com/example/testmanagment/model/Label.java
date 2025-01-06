@@ -1,7 +1,13 @@
 package com.example.testmanagment.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name="projectlabels")
 public class Label {
@@ -20,61 +26,24 @@ public class Label {
     @Column(name="labelcolor")
     private String labelColor;
 
+    @Column(name="isdeleted")
+    private Boolean isdeleted;
+
     //const
     public Label(){}
 
-    public Label(String labelName, String labelDescription, String labelColor) {
+    public Label(String labelName, String labelDescription, String labelColor, Boolean isdeleted) {
         this.labelName = labelName;
         this.labelDescription = labelDescription;
         this.labelColor = labelColor;
+        this.isdeleted = isdeleted;
     }
-
 
     //getter and setter
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLabelName() {
-        return labelName;
-    }
-
-    public void setLabelName(String labelName) {
-        this.labelName = labelName;
-    }
-
-    public String getLabelDescription() {
-        return labelDescription;
-    }
-
-    public void setLabelDescription(String labelDescription) {
-        this.labelDescription = labelDescription;
-    }
-
-    public String getLabelColor() {
-        return labelColor;
-    }
-
-    public void setLabelColor(String labelColor) {
-        this.labelColor = labelColor;
-    }
 
 
     //toString
 
 
-    @Override
-    public String toString() {
-        return "Label{" +
-                "id=" + id +
-                ", labelName='" + labelName + '\'' +
-                ", labelDescription='" + labelDescription + '\'' +
-                ", labelColor='" + labelColor + '\'' +
-                '}';
-    }
+
 }

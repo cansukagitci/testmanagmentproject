@@ -5,24 +5,28 @@ import com.example.testmanagment.model.UserResponse;
 import com.example.testmanagment.service.LabelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/projects")
+@RequestMapping("/api/label")
 public class LabelController {
     @Autowired
     private LabelService labelService;
 
     @PostMapping("/addlabel")
-    public ResponseEntity<UserResponse> addLabel(@RequestBody LabelDto labelDto){
+    public ResponseEntity<UserResponse> addLabel(@RequestBody LabelDto labelDto) {
 
-        UserResponse response=labelService.addLabel(labelDto);
+        UserResponse response = labelService.addLabel(labelDto);
         return ResponseEntity.ok(response);
     }
 
+    //delete
+    @DeleteMapping("{id}")
+    public ResponseEntity<UserResponse> deleteProject(@PathVariable Long id) {
+
+        UserResponse response =labelService.deleteLabel(id);
+        return ResponseEntity.ok(response);
+    }
 
 
 }

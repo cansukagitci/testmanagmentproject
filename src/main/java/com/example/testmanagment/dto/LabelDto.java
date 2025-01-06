@@ -5,15 +5,17 @@ public class LabelDto {
     private String labelname;
     private String labeldescription;
     private String labelcolor;
+    private boolean isdeleted;
 
 
     //const
     public LabelDto(){}
 
-    public LabelDto(String labelname, String labeldescription, String labelcolor) {
+    public LabelDto(String labelname, String labeldescription, String labelcolor, boolean isdeleted) {
         this.labelname = labelname;
         this.labeldescription = labeldescription;
         this.labelcolor = labelcolor;
+        this.isdeleted = isdeleted;
     }
 
     //getter and setter
@@ -41,5 +43,13 @@ public class LabelDto {
 
     public void setLabelcolor(String labelcolor) {
         this.labelcolor = labelcolor;
+    }
+
+    public boolean isIsdeleted() {
+        return isdeleted;
+    }
+
+    public void setIsdeleted(boolean isdeleted) {
+        this.isdeleted = isdeleted;
     }
 }

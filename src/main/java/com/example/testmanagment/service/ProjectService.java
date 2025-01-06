@@ -195,29 +195,49 @@ public UserResponse deleteProject(long projectId) {
 
         // Projeyi kontrol et
         Optional<Project> optionalProject = projectRepository.findById(projectToLabelDto.getProjectId());
+
         if (!optionalProject.isPresent()) {
             throw new RuntimeException("Project not found; ID: " + projectToLabelDto.getProjectId());
         }
 
+
+
+        Project project = optionalProject.get();
+
+
+
+
         // İlişki oluşturma işlemi
         for (Long labelId : labelIds) {
             Optional<Label> optionalLabel = labelRepository.findById(labelId);
+
             if (!optionalLabel.isPresent()) {
-                throw new RuntimeException("Label not found; ID: " + labelId);
+                // throw new RuntimeException("Label not found; ID: " + labelId);
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Label not found " + labelId));
+                return new UserResponse(userDetails);
+
             }
+            Optional<ProjecttoLabel> existingRelation = projectToLabelRepository.findByProjectAndLabel(project, optionalLabel.get());
+
+            if (existingRelation.isPresent()) {
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Duplicate entry for project " + project.getName() + " and label " + optionalLabel.get().getLabelName()));
+                continue;  // Eğer duplicate varsa, bu etiketi atla ve diğerlerini kontrol et
+                 }
 
 
-            ProjecttoLabel ref = new ProjecttoLabel();
-            ref.setProject(optionalProject.get());
-            ref.setLabel(optionalLabel.get());
 
-            projectToLabelRepository.save(ref); // İlişkiyi kaydet
-            userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+                ProjecttoLabel ref=new ProjecttoLabel();
+                ref = new ProjecttoLabel();
+                ref.setProject(optionalProject.get());
+                ref.setLabel(optionalLabel.get());
+
+                projectToLabelRepository.save(ref); // İlişkiyi kaydet
+                userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+            }
+        return new UserResponse(userDetails);
         }
 
-        return new UserResponse(userDetails);
 
-    }
 
 
 }

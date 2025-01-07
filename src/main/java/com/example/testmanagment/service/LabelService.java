@@ -36,7 +36,7 @@ public class LabelService {
 
 
         //control duplicate
-        Label existingLabel = labelRepository.findByLabelName(labelDto.getLabelname());
+        Label existingLabel = labelRepository.findByLabelname(labelDto.getLabelname());
         if (existingLabel != null) {
             userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Label name already exists"));
             return new UserResponse(userDetails);
@@ -44,14 +44,15 @@ public class LabelService {
 
 
         Label label = new Label();
-        label.setLabelName(labelDto.getLabelname());
-        label.setLabelDescription(labelDto.getLabeldescription());
-        label.setLabelColor(labelDto.getLabelcolor());
+        label.setLabelname(labelDto.getLabelname());
+        label.setLabeldescription(labelDto.getLabeldescription());
+        label.setLabelcolor(labelDto.getLabelcolor());
+
         label.setIsdeleted(false);
 
         try {
             labelRepository.save(label);
-            logService.logInfo("Label added successfully: " + label.getLabelName());
+            logService.logInfo("Label added successfully: " + label.getLabelname());
             userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
         } catch (Exception e) {
             logService.logError("Service Error");
@@ -70,13 +71,13 @@ public class LabelService {
         deleteLabel.ifPresentOrElse(label -> {
             // Check if the label is already marked as deleted
             if (label.getIsdeleted()) {
-                logService.logError("Label is already deleted: " + label.getLabelName());
+                logService.logError("Label is already deleted: " + label.getLabelname());
                 userDetails.add(new UserResponse.UserDetail(0, true, "Label already is deleted"));
             } else {
                 // Mark the label as deleted
                 label.setIsdeleted(true);
                 labelRepository.save(label);
-                logService.logInfo("Label deleted successfully: " + label.getLabelName());
+                logService.logInfo("Label deleted successfully: " + label.getLabelname());
                 userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
             }
         }, () -> {
@@ -88,9 +89,58 @@ public class LabelService {
         return new UserResponse(userDetails);
     }
 
+    //update label
+    public UserResponse updateLabel(Long id, Label updateLabel) {
+        List<UserResponse.UserDetail> userDetails = new ArrayList<>();
 
 
+        // Proje adı boş kontrolü
+        if (updateLabel.getLabelname() == null || updateLabel.getLabelname().trim().isEmpty()) {
 
+            logService.logError("Empty label name");
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Label name must not be null"));
+            return new UserResponse(userDetails);
+        }
+
+
+        Optional<Label> existingLabel = labelRepository.findById(id);
+
+        // Proje mevcut değilse
+        if (existingLabel.isEmpty()) {
+            logService.logError("Project not found for ID: " + id);
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Project not found"));
+            return new UserResponse(userDetails);
+        }
+
+
+        Label label = existingLabel.orElseThrow(() -> {
+            logService.logError("Label  must not be null: " + id);
+            return new IllegalArgumentException("SERVICE_RESPONSE_FAILURE: Label must not be null");
+        });
+
+
+        label.setLabelname(updateLabel.getLabelname());
+        label.setLabeldescription(updateLabel.getLabeldescription());
+
+        labelRepository.save(label);
+
+        logService.logInfo("Project updated successfully: " + label.getLabelname());
+        userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+
+
+        return new UserResponse(userDetails);
+    }
+
+    //get Label
+    public List<Label> getAllLabels() {
+        return labelRepository.findAll();
+    }
+
+    //get Label by Id
+    public Optional<Label> getLabelById(Long id) {
+
+        return labelRepository.findById(id);  // Kullanıcıyı ID ile bulma
+    }
 
 
 }

@@ -1,7 +1,12 @@
 package com.example.testmanagment.dto;
 
-public class LabelDto {
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+public class LabelDto {
+    private Long id;
     private String labelname;
     private String labeldescription;
     private String labelcolor;
@@ -18,38 +23,5 @@ public class LabelDto {
         this.isdeleted = isdeleted;
     }
 
-    //getter and setter
 
-
-    public String getLabelname() {
-        return labelname;
-    }
-
-    public void setLabelname(String labelname) {
-        this.labelname = labelname;
-    }
-
-    public String getLabeldescription() {
-        return labeldescription;
-    }
-
-    public void setLabeldescription(String labeldescription) {
-        this.labeldescription = labeldescription;
-    }
-
-    public String getLabelcolor() {
-        return labelcolor;
-    }
-
-    public void setLabelcolor(String labelcolor) {
-        this.labelcolor = labelcolor;
-    }
-
-    public boolean isIsdeleted() {
-        return isdeleted;
-    }
-
-    public void setIsdeleted(boolean isdeleted) {
-        this.isdeleted = isdeleted;
-    }
 }

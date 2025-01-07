@@ -17,14 +17,14 @@ public class Label {
     private Long id;
 
     @Column(name="labelname")
-    private String labelName;
+    private String labelname;
 
     @Column(name="labeldescription")
-    private String labelDescription;
+    private String labeldescription;
 
 
     @Column(name="labelcolor")
-    private String labelColor;
+    private String labelcolor;
 
     @Column(name="isdeleted")
     private Boolean isdeleted;
@@ -32,10 +32,10 @@ public class Label {
     //const
     public Label(){}
 
-    public Label(String labelName, String labelDescription, String labelColor, Boolean isdeleted) {
-        this.labelName = labelName;
-        this.labelDescription = labelDescription;
-        this.labelColor = labelColor;
+    public Label(String labelname, String labeldescription, String labelcolor, Boolean isdeleted) {
+        this.labelname = labelname;
+        this.labeldescription = labeldescription;
+        this.labelcolor = labelcolor;
         this.isdeleted = isdeleted;
     }
 

@@ -3,6 +3,7 @@ package com.example.testmanagment.security.example.testmanagment.service;
 import com.example.testmanagment.model.User;
 import com.example.testmanagment.model.UserResponse;
 import com.example.testmanagment.repository.UserRepository;
+import com.example.testmanagment.service.LogService;
 import com.example.testmanagment.service.UserService;
 import com.example.testmanagment.util.JwtUtil;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,6 +28,9 @@ public class UserServiceTest {
 
     @Mock
     private JwtUtil jwtUtil;
+
+    @Mock
+    private LogService logService;
 
     private User testUser;
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/projects")
@@ -31,10 +32,7 @@ public class ProjectController {
     //validate token
     @GetMapping("/validate")
     public ResponseEntity<String> validateTokenProject(@RequestParam String token) {
-        try{
-
-
-
+        try {
 
 
             if (jwtUtil.validateToken(token, jwtUtil.extractUsername(token))) {
@@ -44,25 +42,21 @@ public class ProjectController {
                 return ResponseEntity.ok("Token is valid");
             } else {
                 return ResponseEntity.status(401).body("Token is invalid");
-            }}catch(IllegalArgumentException e){
+            }
+        } catch (IllegalArgumentException e) {
             return ResponseEntity.status(401).body(e.getMessage());
         }
     }
 
 
-
-
-
     @PostMapping("/add")
-    public ResponseEntity<UserResponse> addProject(@RequestBody ProjectDto projectDto,@RequestHeader("Authorization") String authorization) {
+    public ResponseEntity<UserResponse> addProject(@RequestBody ProjectDto projectDto, @RequestHeader("Authorization") String authorization) {
 
-           validateTokenProject(authorization);
+        validateTokenProject(authorization);
 
 
-        UserResponse response=projectService.addProject(projectDto);
+        UserResponse response = projectService.addProject(projectDto);
         return ResponseEntity.ok(response);
-
-
 
 
     }
@@ -70,25 +64,26 @@ public class ProjectController {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //delete
     @DeleteMapping("{id}")
-    public ResponseEntity<UserResponse> deleteProject(@PathVariable Long id, @RequestHeader("Authorization") String authorization)
-    {
+    public ResponseEntity<UserResponse> deleteProject(@PathVariable Long id, @RequestHeader("Authorization") String authorization) {
         validateTokenProject(authorization);
-        UserResponse response=projectService.deleteProject(id);
+        UserResponse response = projectService.deleteProject(id);
 
 
         return ResponseEntity.ok(response);
     }
-    /////////////////////////////////////////////////////////////////////////////
-   //assign label
 
-  /*  @PostMapping("/{projectId}/assign-label/{labelId}")
-    public ResponseEntity<UserResponse> assignLabelToProject(@PathVariable Long projectId, @PathVariable Long labelId,@RequestHeader("Authorization") String authorization) {
+    //update
+    @PutMapping("{id}")
+    public ResponseEntity<UserResponse> updateProject(@PathVariable Long id, @RequestBody Project updateProject,@RequestHeader("Authorization") String authorization) {
         validateTokenProject(authorization);
-
-        UserResponse response=projectService.assignPTL(projectId,labelId);
+        UserResponse response = projectService.updateProject(id, updateProject);
         return ResponseEntity.ok(response);
+    }
 
-    }*/
+
+    /////////////////////////////////////////////////////////////////////////////
+    //assign label
+
 
     @PostMapping("/assign-label") // Uygun Endpoint
     public ResponseEntity<UserResponse> assignLabelToProject(
@@ -100,6 +95,19 @@ public class ProjectController {
         UserResponse response = projectService.assignPTL(projectToLabelDto); // Servisteki metodu çağır
 
         return ResponseEntity.ok(response); // Başarı yanıtı döndür
+    }
+
+
+    @GetMapping
+    public List<Project> getProjects(@RequestHeader("Authorization") String authorization) {
+        validateTokenProject(authorization);
+        return projectService.getAllProjects();
+    }
+
+    @GetMapping("{id}")
+    public Optional<Project> getProjectById(@PathVariable Long id, @RequestHeader("Authorization") String authorization) {
+        validateTokenProject(authorization);
+        return projectService.getProjectById(id);
     }
 
 }

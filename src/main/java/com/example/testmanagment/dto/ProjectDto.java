@@ -1,12 +1,15 @@
 package com.example.testmanagment.dto;
 
 import com.example.testmanagment.model.Label;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
-
+@Getter
+@Setter
 public class ProjectDto {
-
+    private Long id;
     private String name;
     private String description;
     private boolean isdeleted;
@@ -21,29 +24,5 @@ public class ProjectDto {
         this.isdeleted = isdeleted;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
-
-    public boolean isIsdeleted() {
-        return isdeleted;
-    }
-
-    public void setIsdeleted(boolean isdeleted) {
-        this.isdeleted = isdeleted;
-    }
 }

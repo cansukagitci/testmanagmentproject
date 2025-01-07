@@ -245,7 +245,6 @@ public class ProjectService {
     }
 
 
-
     public UserResponse removePTL(ProjecttoLabelDTO projectToLabelDto) {
         List<Long> labelIds = projectToLabelDto.getLabelId();
         List<UserResponse.UserDetail> userDetails = new ArrayList<>();
@@ -299,6 +298,17 @@ public class ProjectService {
     }
 
 
+    /////////////////////
+    private <T> T findByIdAndHandleError(Optional<T> optionalEntity, Long id, String entityName, List<UserResponse.UserDetail> userDetails) {
+        return optionalEntity.orElseThrow(() -> {
+            String errorMsg = entityName + " not found; ID: " + id;
+            logService.logError(errorMsg);
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + errorMsg));
+            return new RuntimeException(errorMsg);
+        });
+    }
+
+
     //////////////////////////////////
     //assign user to project
     public UserResponse assignPTU(ProjecttoUserDTO projectToUserDto) {
@@ -306,24 +316,26 @@ public class ProjectService {
 
         List<UserResponse.UserDetail> userDetails = new ArrayList<>();
 
-        // Projeyi kontrol et
+
         Project project;
         try {
             project = projectRepository.findById(projectToUserDto.getProjectId())
                     .orElseThrow(() -> {
                         String errorMsg = "Project not found; ID: " + projectToUserDto.getProjectId();
                         logService.logError(errorMsg);
-                        return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                        return new RuntimeException(errorMsg);
                     });
         } catch (RuntimeException e) {
             logService.logError("Service error");
-            // İşlemi yapmadan önce kullanıcı detaylarını ekle
+
             userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
-            return new UserResponse(userDetails); // Hata ile geri dön
+            return new UserResponse(userDetails);
         }
+
 
         // İlişki oluşturma işlemi
         for (Long userId : userIds) {
+
 
             User user;
             try {
@@ -331,12 +343,16 @@ public class ProjectService {
                         .orElseThrow(() -> {
                             String errorMsg = "User not found; ID: " + userId;
                             logService.logError(errorMsg);
-                            return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + errorMsg));
+                            return new RuntimeException(errorMsg);
                         });
+
+
             } catch (RuntimeException e) {
                 logService.logError("Service error");
-                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
-                return new UserResponse(userDetails); // Hata ile geri dön
+                //userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+                //return new UserResponse(userDetails);
+                continue;
             }
 
             Optional<ProjecttoUser> existingRelation = projectToUserRepository.findByProjectAndUser(project, user);
@@ -344,22 +360,21 @@ public class ProjectService {
             if (existingRelation.isPresent()) {
                 logService.logError("Duplicate entry and user for project ");
                 userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Duplicate entry for project " + project.getName() + " and user " + user.getUsername()));
-                continue; // Eğer duplicate varsa bu etiketi atla ve diğerlerini kontrol et
+                continue;
             }
 
-            // İlişkiyi oluştur
+
             ProjecttoUser ref = new ProjecttoUser();
             ref.setProject(project);
             ref.setUser(user);
             logService.logInfo("User assigned to Project successfully");
 
-            projectToUserRepository.save(ref); // İlişkiyi kaydet
+            projectToUserRepository.save(ref);
             userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
         }
 
         return new UserResponse(userDetails);
     }
-
 
 
 }

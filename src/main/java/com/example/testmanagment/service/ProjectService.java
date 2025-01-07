@@ -1,12 +1,10 @@
 package com.example.testmanagment.service;
 
 import com.example.testmanagment.dto.ProjectDto;
+import com.example.testmanagment.dto.ProjecttoUserDTO;
 import com.example.testmanagment.exception.CustomException;
 import com.example.testmanagment.model.*;
-import com.example.testmanagment.repository.LabelRepository;
-import com.example.testmanagment.repository.ProjectRepository;
-import com.example.testmanagment.repository.ProjectToLabelRepository;
-import com.example.testmanagment.repository.UserRepository;
+import com.example.testmanagment.repository.*;
 import com.example.testmanagment.util.JwtUtil;
 import jakarta.servlet.http.PushBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +35,9 @@ public class ProjectService {
 
     @Autowired
     private ProjectToLabelRepository projectToLabelRepository;
+
+    @Autowired
+    private ProjecttoUserRepository projectToUserRepository;
 
     private void validateLabel(Long labelId) {
         Optional<Label> optionalLabel = labelRepository.findById(labelId);
@@ -242,6 +243,123 @@ public class ProjectService {
     public Optional<Project> getProjectById(Long id) {
         return projectRepository.findById(id);  // Kullanıcıyı ID ile bulma
     }
+
+
+
+    public UserResponse removePTL(ProjecttoLabelDTO projectToLabelDto) {
+        List<Long> labelIds = projectToLabelDto.getLabelId();
+        List<UserResponse.UserDetail> userDetails = new ArrayList<>();
+
+        // Projeyi kontrol et
+        Project project;
+        try {
+            project = projectRepository.findById(projectToLabelDto.getProjectId())
+                    .orElseThrow(() -> {
+                        String errorMsg = "Project not found; ID: " + projectToLabelDto.getProjectId();
+                        logService.logError(errorMsg);
+                        return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                    });
+        } catch (RuntimeException e) {
+            logService.logError("Service error");
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+            return new UserResponse(userDetails); // Hata ile geri dön
+        }
+
+        // İlişki kaldırma işlemi
+        for (Long labelId : labelIds) {
+            Label label;
+            try {
+                label = labelRepository.findById(labelId)
+                        .orElseThrow(() -> {
+                            String errorMsg = "Label not found; ID: " + labelId;
+                            logService.logError(errorMsg);
+                            return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                        });
+            } catch (RuntimeException e) {
+                logService.logError("Service error");
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+                return new UserResponse(userDetails); // Hata ile geri dön
+            }
+
+            // Proje ve etiket arasındaki ilişkiyi bul
+            Optional<ProjecttoLabel> existingRelation = projectToLabelRepository.findByProjectAndLabel(project, label);
+
+            if (existingRelation.isPresent()) {
+                // İlişkiyi sil
+                projectToLabelRepository.delete(existingRelation.get());
+                logService.logInfo("Label removed from project successfully");
+                userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS: Label removed from project " + project.getName()));
+            } else {
+                logService.logError("No existing relation for project: " + project.getName() + " and label: " + label.getLabelname());
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: No relation found for project " + project.getName() + " and label " + label.getLabelname()));
+            }
+        }
+
+        return new UserResponse(userDetails);
+    }
+
+
+    //////////////////////////////////
+    //assign user to project
+    public UserResponse assignPTU(ProjecttoUserDTO projectToUserDto) {
+        List<Long> userIds = projectToUserDto.getUserId();
+
+        List<UserResponse.UserDetail> userDetails = new ArrayList<>();
+
+        // Projeyi kontrol et
+        Project project;
+        try {
+            project = projectRepository.findById(projectToUserDto.getProjectId())
+                    .orElseThrow(() -> {
+                        String errorMsg = "Project not found; ID: " + projectToUserDto.getProjectId();
+                        logService.logError(errorMsg);
+                        return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                    });
+        } catch (RuntimeException e) {
+            logService.logError("Service error");
+            // İşlemi yapmadan önce kullanıcı detaylarını ekle
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+            return new UserResponse(userDetails); // Hata ile geri dön
+        }
+
+        // İlişki oluşturma işlemi
+        for (Long userId : userIds) {
+
+            User user;
+            try {
+                user = userRepository.findById(userId)
+                        .orElseThrow(() -> {
+                            String errorMsg = "User not found; ID: " + userId;
+                            logService.logError(errorMsg);
+                            return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                        });
+            } catch (RuntimeException e) {
+                logService.logError("Service error");
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+                return new UserResponse(userDetails); // Hata ile geri dön
+            }
+
+            Optional<ProjecttoUser> existingRelation = projectToUserRepository.findByProjectAndUser(project, user);
+
+            if (existingRelation.isPresent()) {
+                logService.logError("Duplicate entry and user for project ");
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Duplicate entry for project " + project.getName() + " and user " + user.getUsername()));
+                continue; // Eğer duplicate varsa bu etiketi atla ve diğerlerini kontrol et
+            }
+
+            // İlişkiyi oluştur
+            ProjecttoUser ref = new ProjecttoUser();
+            ref.setProject(project);
+            ref.setUser(user);
+            logService.logInfo("User assigned to Project successfully");
+
+            projectToUserRepository.save(ref); // İlişkiyi kaydet
+            userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+        }
+
+        return new UserResponse(userDetails);
+    }
+
 
 
 }

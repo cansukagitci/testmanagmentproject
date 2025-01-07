@@ -3,6 +3,7 @@ package com.example.testmanagment.controller;
 
 import com.example.testmanagment.dto.ProjectDto;
 import com.example.testmanagment.dto.ProjecttoLabelDTO;
+import com.example.testmanagment.dto.ProjecttoUserDTO;
 import com.example.testmanagment.model.Project;
 import com.example.testmanagment.model.User;
 import com.example.testmanagment.model.UserResponse;
@@ -108,6 +109,27 @@ public class ProjectController {
     public Optional<Project> getProjectById(@PathVariable Long id, @RequestHeader("Authorization") String authorization) {
         validateTokenProject(authorization);
         return projectService.getProjectById(id);
+    }
+
+    // Proje ve etiket ilişkisini kaldırma
+    @DeleteMapping("/unassign-label")
+    public ResponseEntity<UserResponse> removeLabels(@RequestBody ProjecttoLabelDTO projectToLabelDto,@RequestHeader("Authorization") String authorization) {
+        validateTokenProject(authorization);
+        UserResponse response = projectService.removePTL(projectToLabelDto);
+        return ResponseEntity.ok(response);
+    }
+
+
+    @PostMapping("/assign-user") // Uygun Endpoint
+    public ResponseEntity<UserResponse> assignUserToProject(
+            @RequestBody ProjecttoUserDTO projectToUserDto,
+            @RequestHeader("Authorization") String authorization) {
+
+        validateTokenProject(authorization); // Token kontrolü
+
+        UserResponse response = projectService.assignPTU(projectToUserDto); // Servisteki metodu çağır
+
+        return ResponseEntity.ok(response); // Başarı yanıtı döndür
     }
 
 }

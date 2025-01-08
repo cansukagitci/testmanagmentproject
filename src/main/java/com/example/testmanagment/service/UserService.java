@@ -1,6 +1,7 @@
 package com.example.testmanagment.service;
 
 import ch.qos.logback.core.encoder.EchoEncoder;
+import com.example.testmanagment.helper.GenericServiceHelper;
 import com.example.testmanagment.model.User;
 import com.example.testmanagment.model.UserResponse;
 import com.example.testmanagment.repository.UserRepository;
@@ -75,9 +76,11 @@ public class UserService {
         try {
 
 
-            userRepository.save(user);
+          //  userRepository.save(user);
             logService.logInfo("User registered successfully: " + user.getUsername());
-            userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+            //userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+            UserResponse response = GenericServiceHelper.saveEntity(user, userRepository,
+                    "SERVICE_RESPONSE_SUCCESS", userDetails);
 
 
         } catch (Exception e) {
@@ -120,9 +123,12 @@ public class UserService {
                 }else {
                     user.setIsdeleted(true);
                     logService.logInfo("User deleted successfully: " + user.getUsername());
-                    userRepository.save(user);
+                   // userRepository.save(user);
 
-                    userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+
+                   // userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+                    UserResponse response = GenericServiceHelper.saveEntity(user, userRepository,
+                            "SERVICE_RESPONSE_SUCCESS", userDetails);
 
                 }
             }else {
@@ -173,9 +179,11 @@ public class UserService {
                 user.setUsername(updateUser.getUsername());
                 user.setPassword(updateUser.getPassword());
                 user.setEmail(updateUser.getEmail());
-                userRepository.save(user);
+              //  userRepository.save(user);
                 logService.logInfo("User updated successfully: " + user.getUsername());
-                userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+              //  userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+                UserResponse response = GenericServiceHelper.saveEntity(user, userRepository,
+                        "SERVICE_RESPONSE_SUCCESS", userDetails);
 
 
             }

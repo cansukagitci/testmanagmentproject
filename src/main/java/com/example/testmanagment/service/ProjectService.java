@@ -3,6 +3,7 @@ package com.example.testmanagment.service;
 import com.example.testmanagment.dto.ProjectDto;
 import com.example.testmanagment.dto.ProjecttoUserDTO;
 import com.example.testmanagment.exception.CustomException;
+import com.example.testmanagment.helper.GenericServiceHelper;
 import com.example.testmanagment.model.*;
 import com.example.testmanagment.repository.*;
 import com.example.testmanagment.util.JwtUtil;
@@ -38,6 +39,11 @@ public class ProjectService {
 
     @Autowired
     private ProjecttoUserRepository projectToUserRepository;
+
+    //define interface for repository
+    public interface RelationshipRepository<T, U> {
+        Optional<T> findByEntity1AndEntity2(U entity1, U entity2);
+    }
 
     private void validateLabel(Long labelId) {
         Optional<Label> optionalLabel = labelRepository.findById(labelId);
@@ -85,9 +91,12 @@ public class ProjectService {
 
 
         try {
-            projectRepository.save(project);
+           // projectRepository.save(project);
             logService.logInfo("Project added successfully: " + project.getName());
-            userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+           // userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+            UserResponse response = GenericServiceHelper.saveEntity(project, projectRepository,
+                    "Added project successfully", userDetails);
+
         } catch (Exception e) {
             //logService.logError("Service Error");
             userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
@@ -114,9 +123,12 @@ public class ProjectService {
             } else {
                 // Mark the project as deleted
                 project.setIsdeleted(true);
-                projectRepository.save(project);
+               // projectRepository.save(project);
                 logService.logInfo("Project deleted successfully: " + project.getName());
-                userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+               // userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+
+                UserResponse response = GenericServiceHelper.saveEntity(project, projectRepository,
+                        "Deleted project successfully", userDetails);
             }
         }, () -> {
             // Handle case when the project is not found
@@ -164,15 +176,25 @@ public class ProjectService {
         // Güncellemeleri yap
         project.setName(updateProject.getName());
         project.setDescription(updateProject.getDescription());
-        projectRepository.save(project);
+
+        /*projectRepository.save(project);
 
         logService.logInfo("Project updated successfully: " + project.getName());
-        userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+
+
+        userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));*/
+        UserResponse response = GenericServiceHelper.saveEntity(project, projectRepository,
+                "Updated project successfully", userDetails);
 
 
         return new UserResponse(userDetails);
     }
+    ///////////////////////////////////
 
+    private boolean isDuplicateEntry(Project project, Label label) {
+        Optional<ProjecttoLabel> existingRelation = projectToLabelRepository.findByProjectAndLabel(project, label);
+        return existingRelation.isPresent();
+    }
 ///////////////////////////////////////////////////////////////////////
 //assign label to project
 
@@ -214,7 +236,7 @@ public class ProjectService {
 
             Optional<ProjecttoLabel> existingRelation = projectToLabelRepository.findByProjectAndLabel(project, label);
 
-            if (existingRelation.isPresent()) {
+            if (isDuplicateEntry(project, label)) {
                 logService.logError("Duplicate entry and label for project ");
                 userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Duplicate entry for project " + project.getName() + " and label " + label.getLabelname()));
                 continue; // Eğer duplicate varsa bu etiketi atla ve diğerlerini kontrol et
@@ -226,8 +248,12 @@ public class ProjectService {
             ref.setLabel(label);
             logService.logInfo("Label assigned to Project successfully");
 
-            projectToLabelRepository.save(ref); // İlişkiyi kaydet
-            userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+           /* projectToLabelRepository.save(ref); // İlişkiyi kaydet
+            userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));*/
+
+            UserResponse response = GenericServiceHelper.saveEntity(ref, projectToLabelRepository,
+                    "Label assigned to project successfully", userDetails);
+
         }
 
         return new UserResponse(userDetails);
@@ -287,7 +313,11 @@ public class ProjectService {
                 // İlişkiyi sil
                 projectToLabelRepository.delete(existingRelation.get());
                 logService.logInfo("Label removed from project successfully");
+
                 userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS: Label removed from project " + project.getName()));
+
+
+
             } else {
                 logService.logError("No existing relation for project: " + project.getName() + " and label: " + label.getLabelname());
                 userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: No relation found for project " + project.getName() + " and label " + label.getLabelname()));
@@ -298,7 +328,8 @@ public class ProjectService {
     }
 
 
-    /////////////////////
+    //////////////////////////////////////////////////
+    //Handle error for project and users
     private <T> T findByIdAndHandleError(Optional<T> optionalEntity, Long id, String entityName, List<UserResponse.UserDetail> userDetails) {
         return optionalEntity.orElseThrow(() -> {
             String errorMsg = entityName + " not found; ID: " + id;
@@ -307,28 +338,28 @@ public class ProjectService {
             return new RuntimeException(errorMsg);
         });
     }
-
-
     //////////////////////////////////
     //assign user to project
     public UserResponse assignPTU(ProjecttoUserDTO projectToUserDto) {
         List<Long> userIds = projectToUserDto.getUserId();
-
         List<UserResponse.UserDetail> userDetails = new ArrayList<>();
-
 
         Project project;
         try {
-            project = projectRepository.findById(projectToUserDto.getProjectId())
+           /* project = projectRepository.findById(projectToUserDto.getProjectId())
                     .orElseThrow(() -> {
                         String errorMsg = "Project not found; ID: " + projectToUserDto.getProjectId();
                         logService.logError(errorMsg);
                         return new RuntimeException(errorMsg);
-                    });
+                    });*/
+            Optional<Project> optionalProject = projectRepository.findById(projectToUserDto.getProjectId());
+            project = findByIdAndHandleError(optionalProject, projectToUserDto.getProjectId(), "Project", userDetails);
+
+
         } catch (RuntimeException e) {
             logService.logError("Service error");
 
-            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+            //userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
             return new UserResponse(userDetails);
         }
 
@@ -338,15 +369,16 @@ public class ProjectService {
 
 
             User user;
-            try {
+            try {/*
                 user = userRepository.findById(userId)
                         .orElseThrow(() -> {
                             String errorMsg = "User not found; ID: " + userId;
                             logService.logError(errorMsg);
                             userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + errorMsg));
                             return new RuntimeException(errorMsg);
-                        });
-
+                        });*/
+                Optional<User> optionalUser = userRepository.findById(userId);
+                user = findByIdAndHandleError(optionalUser, userId, "User", userDetails);
 
             } catch (RuntimeException e) {
                 logService.logError("Service error");
@@ -369,8 +401,11 @@ public class ProjectService {
             ref.setUser(user);
             logService.logInfo("User assigned to Project successfully");
 
-            projectToUserRepository.save(ref);
-            userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+          //  projectToUserRepository.save(ref);
+            //userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+
+            UserResponse response = GenericServiceHelper.saveEntity(ref, projectToUserRepository,
+                    "User assigned to project successfully", userDetails);
         }
 
         return new UserResponse(userDetails);

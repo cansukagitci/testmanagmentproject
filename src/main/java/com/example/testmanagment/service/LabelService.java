@@ -2,6 +2,7 @@ package com.example.testmanagment.service;
 
 import com.example.testmanagment.dto.LabelDto;
 import com.example.testmanagment.dto.ProjectDto;
+import com.example.testmanagment.helper.GenericServiceHelper;
 import com.example.testmanagment.model.Label;
 import com.example.testmanagment.model.Project;
 import com.example.testmanagment.model.User;
@@ -51,9 +52,12 @@ public class LabelService {
         label.setIsdeleted(false);
 
         try {
-            labelRepository.save(label);
+            //labelRepository.save(label);
             logService.logInfo("Label added successfully: " + label.getLabelname());
-            userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+           // userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+
+            UserResponse response = GenericServiceHelper.saveEntity(label, labelRepository,
+                    "Added label successfully", userDetails);
         } catch (Exception e) {
             logService.logError("Service Error");
             userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
@@ -76,9 +80,11 @@ public class LabelService {
             } else {
                 // Mark the label as deleted
                 label.setIsdeleted(true);
-                labelRepository.save(label);
+             //   labelRepository.save(label);
                 logService.logInfo("Label deleted successfully: " + label.getLabelname());
-                userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+               // userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+                UserResponse response = GenericServiceHelper.saveEntity(label, labelRepository,
+                        "Deleted label successfully", userDetails);
             }
         }, () -> {
             // Handle case when the label is not found
@@ -122,10 +128,12 @@ public class LabelService {
         label.setLabelname(updateLabel.getLabelname());
         label.setLabeldescription(updateLabel.getLabeldescription());
 
-        labelRepository.save(label);
+       // labelRepository.save(label);
 
         logService.logInfo("Project updated successfully: " + label.getLabelname());
-        userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+       // userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+        UserResponse response = GenericServiceHelper.saveEntity(label, labelRepository,
+                "Updated label successfully", userDetails);
 
 
         return new UserResponse(userDetails);

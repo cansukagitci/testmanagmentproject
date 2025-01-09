@@ -411,5 +411,60 @@ public class ProjectService {
         return new UserResponse(userDetails);
     }
 
+    public UserResponse removePTU(ProjecttoUserDTO projectToUserDto) {
+        List<Long> userIds = projectToUserDto.getUserId();
+        List<UserResponse.UserDetail> userDetails = new ArrayList<>();
+
+        // Projeyi kontrol et
+        Project project;
+        try {
+            project = projectRepository.findById(projectToUserDto.getProjectId())
+                    .orElseThrow(() -> {
+                        String errorMsg = "Project not found; ID: " + projectToUserDto.getProjectId();
+                        logService.logError(errorMsg);
+                        return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                    });
+        } catch (RuntimeException e) {
+            logService.logError("Service error");
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+            return new UserResponse(userDetails); // Hata ile geri dön
+        }
+
+        // İlişki kaldırma işlemi
+        for (Long userId : userIds) {
+            User user;
+            try {
+                user = userRepository.findById(userId)
+                        .orElseThrow(() -> {
+                            String errorMsg = "User not found; ID: " + userId;
+                            logService.logError(errorMsg);
+                            return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                        });
+            } catch (RuntimeException e) {
+                logService.logError("Service error");
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+                return new UserResponse(userDetails); // Hata ile geri dön
+            }
+
+            // Proje ve etiket arasındaki ilişkiyi bul
+            Optional<ProjecttoUser> existingRelation = projectToUserRepository.findByProjectAndUser(project, user);
+
+            if (existingRelation.isPresent()) {
+                // İlişkiyi sil
+                projectToUserRepository.delete(existingRelation.get());
+                logService.logInfo("User removed from project successfully");
+
+                userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS: User removed from project " + project.getName()));
+
+
+
+            } else {
+                logService.logError("No existing relation for project: " + project.getName() + " and user: " + user.getUsername());
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: No relation found for project " + project.getName() + " and label " + user.getUsername()));
+            }
+        }
+
+        return new UserResponse(userDetails);
+    }
 
 }

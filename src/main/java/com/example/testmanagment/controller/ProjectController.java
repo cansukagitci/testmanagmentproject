@@ -132,4 +132,12 @@ public class ProjectController {
         return ResponseEntity.ok(response); // Başarı yanıtı döndür
     }
 
+    // Proje ve etiket ilişkisini kaldırma
+    @DeleteMapping("/unassign-user")
+    public ResponseEntity<UserResponse> removeUsers(@RequestBody ProjecttoUserDTO projectToUserDto,@RequestHeader("Authorization") String authorization) {
+        validateTokenProject(authorization);
+        UserResponse response = projectService.removePTU(projectToUserDto);
+        return ResponseEntity.ok(response);
+    }
+
 }

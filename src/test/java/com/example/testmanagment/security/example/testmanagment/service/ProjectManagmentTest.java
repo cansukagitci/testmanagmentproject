@@ -65,7 +65,7 @@ public class ProjectManagmentTest {
         assertNotNull(response); // Response nesnesinin null olmaması
         assertNotNull(response.getResult()); // Result alanının null olmaması
         assertFalse(response.getResult().isEmpty()); // Result’ın boş olmaması
-        assertEquals("SERVICE_RESPONSE_SUCCESS", response.getResult().get(0).getMessage());
+        assertEquals("Added project successfully", response.getResult().get(0).getMessage());
     }
 
     //test delete
@@ -90,7 +90,7 @@ public class ProjectManagmentTest {
         assertNotNull(response.getResult()); // Result alanının null olmaması
         assertFalse(response.getResult().isEmpty()); // Result’ın boş olmaması
         assertTrue(response.getResult().get(0).isStatus()); // İlk sonucun durumunun true olması
-        assertEquals("SERVICE_RESPONSE_SUCCESS", response.getResult().get(0).getMessage()); // Mesajı kontrol et
+        assertEquals("Deleted project successfully", response.getResult().get(0).getMessage()); // Mesajı kontrol et
 
         // Projenin silinmiş olarak işaretlendiğini kontrol et
         assertTrue(existingProject.isIsdeleted()); // isDeleted true olmalı
@@ -127,7 +127,7 @@ public class ProjectManagmentTest {
         assertNotNull(response.getResult()); // Result alanının null olmaması
         assertFalse(response.getResult().isEmpty()); // Result’ın boş olmaması
         assertTrue(response.getResult().get(0).isStatus()); // İlk sonucun durumunun true olması
-        assertEquals("SERVICE_RESPONSE_SUCCESS", response.getResult().get(0).getMessage()); // Mesajı kontrol et
+        assertEquals("Updated project successfully", response.getResult().get(0).getMessage()); // Mesajı kontrol et
 
         // Güncellenen proje bilgilerini kontrol et
         assertEquals(updatedProject.getName(), existingProject.getName()); // Yeni isim kontrolü

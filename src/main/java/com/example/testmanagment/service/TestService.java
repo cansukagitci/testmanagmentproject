@@ -2,10 +2,10 @@ package com.example.testmanagment.service;
 
 import com.example.testmanagment.dto.TestDto;
 import com.example.testmanagment.helper.GenericServiceHelper;
-import com.example.testmanagment.model.Project;
 import com.example.testmanagment.model.Test;
 import com.example.testmanagment.model.UserResponse;
 import com.example.testmanagment.repository.TestRepository;
+import jakarta.servlet.http.PushBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,25 +16,35 @@ import java.util.Optional;
 @Service
 public class TestService {
 
-    @Autowired
-    private TestRepository testRepository;
 
-    @Autowired
-    private LogService logService;
+    private final TestRepository testRepository;
+    private final LogService logService;
 
+    //constructor injection
+    @Autowired
+    public TestService(TestRepository testRepository, LogService logService) {
+        this.testRepository = testRepository;
+        this.logService = logService;
+    }
+
+    //show error message
+    private void addError(List<UserResponse.UserDetail> userDetails, String message) {
+        logService.logError(message);
+        userDetails.add(new UserResponse.UserDetail(0, false, message));
+    }
+
+    //create test
     public UserResponse addTest(TestDto testDto) {
 
         List<UserResponse.UserDetail> userDetails = new ArrayList<>();
 
         if (testDto.getTest_item() == null || testDto.getTest_item().trim().isEmpty()) {
-            logService.logError("Test Scenerio cannot be empty");
-            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Test Scenerio Name cannot be empty"));
+            addError(userDetails, "Test Scenerio Name cannot be empty");
             return new UserResponse(userDetails);
         }
 
         if (testDto.getResult() == null || testDto.getResult().trim().isEmpty()) {
-            logService.logError("Test Result cannot be empty");
-            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Test Result cannot be empty"));
+            addError(userDetails, "Test Result cannot be empty");
             return new UserResponse(userDetails);
         }
 
@@ -49,14 +59,15 @@ public class TestService {
         test.setDescription(testDto.getDescription());
         test.setResult(testDto.getResult());
 
-
+        logService.logInfo("Test added successfully: " + test);
         UserResponse response = GenericServiceHelper.saveEntity(test, testRepository,
                 "Added test successfully", userDetails);
         return new UserResponse(userDetails);
     }
 
-    public UserResponse deleteTest(Long testid) {
-        Optional<Test> deleteTest = testRepository.findById(testid);
+    //delete test
+    public UserResponse deleteTest(Long id) {
+        Optional<Test> deleteTest = testRepository.findById(id);
         List<UserResponse.UserDetail> userDetails = new ArrayList<>();
 
         // Handle the presence or absence of the project
@@ -77,7 +88,7 @@ public class TestService {
             }
         }, () -> {
             // Handle case when the project is not found
-            logService.logError("Test not found for ID: " + testid);
+            logService.logError("Test not found for ID: " + id);
             userDetails.add(new UserResponse.UserDetail(0, false, "Test not found")); // Better error message
         });
         return new UserResponse(userDetails);
@@ -85,17 +96,16 @@ public class TestService {
     }
 
     //update
-    public UserResponse updateTest(Long testid, TestDto updateTest) {
+    public UserResponse updateTest(Long id, TestDto updateTest) {
         List<UserResponse.UserDetail> userDetails = new ArrayList<>();
 
 
         // Projeyi bulma
-        Optional<Test> existingTest = testRepository.findById(testid);
+        Optional<Test> existingTest = testRepository.findById(id);
 
         // Proje mevcut değilse
         if (existingTest.isEmpty()) {
-            logService.logError("Test not found for ID: " + testid);
-            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Test not found"));
+            addError(userDetails, "Test not found");
             return new UserResponse(userDetails);
         }
 
@@ -107,7 +117,7 @@ public class TestService {
 
 
         Test test = existingTest.orElseThrow(() -> {
-            logService.logError("Test must not be null: " + testid);
+            logService.logError("Test must not be null: " + id);
             return new IllegalArgumentException("SERVICE_RESPONSE_FAILURE: Test must not be null");
         });
 
@@ -130,11 +140,11 @@ public class TestService {
         test.setResult(updateTest.getResult());
 
 
-
+        logService.logInfo("Project updated successfully: " + id);
 
         /*projectRepository.save(project);
 
-        logService.logInfo("Project updated successfully: " + project.getName());
+
 
 
         userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));*/

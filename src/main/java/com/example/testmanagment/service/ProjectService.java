@@ -91,9 +91,9 @@ public class ProjectService {
 
 
         try {
-           // projectRepository.save(project);
+            // projectRepository.save(project);
             logService.logInfo("Project added successfully: " + project.getName());
-           // userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+            // userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
             UserResponse response = GenericServiceHelper.saveEntity(project, projectRepository,
                     "Added project successfully", userDetails);
 
@@ -123,9 +123,9 @@ public class ProjectService {
             } else {
                 // Mark the project as deleted
                 project.setIsdeleted(true);
-               // projectRepository.save(project);
+                // projectRepository.save(project);
                 logService.logInfo("Project deleted successfully: " + project.getName());
-               // userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
+                // userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
 
                 UserResponse response = GenericServiceHelper.saveEntity(project, projectRepository,
                         "Deleted project successfully", userDetails);
@@ -290,7 +290,7 @@ public class ProjectService {
             return new UserResponse(userDetails); // Hata ile geri dön
         }
 
-        // İlişki kaldırma işlemi
+
         for (Long labelId : labelIds) {
             Label label;
             try {
@@ -306,16 +306,15 @@ public class ProjectService {
                 return new UserResponse(userDetails); // Hata ile geri dön
             }
 
-            // Proje ve etiket arasındaki ilişkiyi bul
+
             Optional<ProjecttoLabel> existingRelation = projectToLabelRepository.findByProjectAndLabel(project, label);
 
             if (existingRelation.isPresent()) {
-                // İlişkiyi sil
+
                 projectToLabelRepository.delete(existingRelation.get());
                 logService.logInfo("Label removed from project successfully");
 
                 userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS: Label removed from project " + project.getName()));
-
 
 
             } else {
@@ -338,6 +337,7 @@ public class ProjectService {
             return new RuntimeException(errorMsg);
         });
     }
+
     //////////////////////////////////
     //assign user to project
     public UserResponse assignPTU(ProjecttoUserDTO projectToUserDto) {
@@ -401,7 +401,7 @@ public class ProjectService {
             ref.setUser(user);
             logService.logInfo("User assigned to Project successfully");
 
-          //  projectToUserRepository.save(ref);
+            //  projectToUserRepository.save(ref);
             //userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS"));
 
             UserResponse response = GenericServiceHelper.saveEntity(ref, projectToUserRepository,
@@ -455,7 +455,6 @@ public class ProjectService {
                 logService.logInfo("User removed from project successfully");
 
                 userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS: User removed from project " + project.getName()));
-
 
 
             } else {

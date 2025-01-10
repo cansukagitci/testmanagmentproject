@@ -89,8 +89,8 @@ public class ProjectManagmentTest {
         assertNotNull(response); // Response nesnesinin null olmaması
         assertNotNull(response.getResult()); // Result alanının null olmaması
         assertFalse(response.getResult().isEmpty()); // Result’ın boş olmaması
-        assertTrue(response.getResult().get(0).isStatus()); // İlk sonucun durumunun true olması
-        assertEquals("Deleted project successfully", response.getResult().get(0).getMessage()); // Mesajı kontrol et
+        assertTrue(response.getResult().getFirst().isStatus()); // İlk sonucun durumunun true olması
+        assertEquals("Deleted project successfully", response.getResult().getFirst().getMessage()); // Mesajı kontrol et
 
         // Projenin silinmiş olarak işaretlendiğini kontrol et
         assertTrue(existingProject.isIsdeleted()); // isDeleted true olmalı
@@ -126,8 +126,8 @@ public class ProjectManagmentTest {
         assertNotNull(response); // Response nesnesinin null olmaması
         assertNotNull(response.getResult()); // Result alanının null olmaması
         assertFalse(response.getResult().isEmpty()); // Result’ın boş olmaması
-        assertTrue(response.getResult().get(0).isStatus()); // İlk sonucun durumunun true olması
-        assertEquals("Updated project successfully", response.getResult().get(0).getMessage()); // Mesajı kontrol et
+        assertTrue(response.getResult().getFirst().isStatus()); // İlk sonucun durumunun true olması
+        assertEquals("Updated project successfully", response.getResult().getFirst().getMessage()); // Mesajı kontrol et
 
         // Güncellenen proje bilgilerini kontrol et
         assertEquals(updatedProject.getName(), existingProject.getName()); // Yeni isim kontrolü

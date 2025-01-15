@@ -1,5 +1,6 @@
 package com.example.testmanagment.service;
 
+import com.example.testmanagment.dto.ProjecttoLabelDTO;
 import com.example.testmanagment.dto.ProjecttoUserDTO;
 import com.example.testmanagment.dto.TestDto;
 import com.example.testmanagment.dto.TesttoProjectDTO;
@@ -255,5 +256,64 @@ public class TestService {
         return new UserResponse(userDetails);
     }
 
+
+    /////////////////////////////////////////////////////////////////
+    public UserResponse removeTTP(TesttoProjectDTO testtoProjectDTO) {
+        List<Long> testIds = testtoProjectDTO.getTestId();
+        List<UserResponse.UserDetail> userDetails = new ArrayList<>();
+
+        // Projeyi kontrol et
+        Project project;
+        try {
+            project = projectRepository.findById(testtoProjectDTO.getProjectid())
+                    .orElseThrow(() -> {
+                        String errorMsg = "Project not found; ID: " + testtoProjectDTO.getProjectid();
+                        logService.logError(errorMsg);
+                        return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                    });
+        } catch (RuntimeException e) {
+            logService.logError("Service error");
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+            return new UserResponse(userDetails); // Hata ile geri dön
+        }
+
+
+
+        for (Long testId : testIds)
+        {
+
+            Test test;
+            try {
+                test =testRepository.findById(testId)
+                        .orElseThrow(() -> {
+                            String errorMsg = "Test not found; ID: " + testId;
+                            logService.logError(errorMsg);
+                            return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                        });
+            } catch (RuntimeException e) {
+                logService.logError("Service error");
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+                return new UserResponse(userDetails); // Hata ile geri dön
+            }
+
+
+            Optional<TesttoProject> existingRelation = testToProjectRepository.findByProjectAndTest(project, test);
+
+            if (existingRelation.isPresent()) {
+
+                testToProjectRepository.delete(existingRelation.get());
+                logService.logInfo("Test removed from project successfully");
+
+                userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS: Test removed from project " + project.getName()));
+
+
+            } else {
+                logService.logError("No existing relation for project: " + project.getName() + " and test: " + test.getId());
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: No relation found for project " + project.getName() + " and test " + test.getId()));
+            }
+        }
+
+        return new UserResponse(userDetails);
+    }
 
 }

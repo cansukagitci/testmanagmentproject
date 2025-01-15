@@ -100,4 +100,12 @@ public class TestController {
         return ResponseEntity.ok(response); // Başarı yanıtı döndür
     }
 
+    // Proje ve etiket ilişkisini kaldırma
+    @DeleteMapping("/unassign-test")
+    public ResponseEntity<UserResponse> removeUsers(@RequestBody TesttoProjectDTO testtoProjectDTO,@RequestHeader("Authorization") String authorization) {
+        validateTokenProject(authorization);
+        UserResponse response = testService.removeTTP(testtoProjectDTO);
+        return ResponseEntity.ok(response);
+    }
+
 }

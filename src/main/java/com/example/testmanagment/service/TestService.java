@@ -1,10 +1,13 @@
 package com.example.testmanagment.service;
 
+import com.example.testmanagment.dto.ProjecttoUserDTO;
 import com.example.testmanagment.dto.TestDto;
+import com.example.testmanagment.dto.TesttoProjectDTO;
 import com.example.testmanagment.helper.GenericServiceHelper;
-import com.example.testmanagment.model.Test;
-import com.example.testmanagment.model.UserResponse;
+import com.example.testmanagment.model.*;
+import com.example.testmanagment.repository.ProjectRepository;
 import com.example.testmanagment.repository.TestRepository;
+import com.example.testmanagment.repository.TesttoProjectRepository;
 import jakarta.servlet.http.PushBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +22,16 @@ public class TestService {
 
     private final TestRepository testRepository;
     private final LogService logService;
+    private final TesttoProjectRepository testToProjectRepository;
+    private final ProjectRepository projectRepository;
 
     //constructor injection
     @Autowired
-    public TestService(TestRepository testRepository, LogService logService) {
+    public TestService(TestRepository testRepository, LogService logService,TesttoProjectRepository testToProjectRepository,ProjectRepository projectRepository) {
         this.testRepository = testRepository;
         this.logService = logService;
+        this.testToProjectRepository=testToProjectRepository;
+        this.projectRepository=projectRepository;
     }
 
     //show error message
@@ -165,5 +172,88 @@ public class TestService {
     public Optional<Test> getTestById(Long id) {
         return testRepository.findById(id);
     }
+    //////////////////////
+    //Handle error for project and users
+    private <T> T findByIdAndHandleError(Optional<T> optionalEntity, Long id, String entityName, List<UserResponse.UserDetail> userDetails) {
+        return optionalEntity.orElseThrow(() -> {
+            String errorMsg = entityName + " not found; ID: " + id;
+            logService.logError(errorMsg);
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + errorMsg));
+            return new RuntimeException(errorMsg);
+        });
+    }
+    /////////////////////////////////////
+
+    public UserResponse assignTTP(TesttoProjectDTO testtoProjectDTO) {
+
+        List<Long> testIds = testtoProjectDTO.getTestId();
+        List<UserResponse.UserDetail> userDetails = new ArrayList<>();
+
+
+        Project project;
+        try {
+            project = projectRepository.findById(testtoProjectDTO.getProjectid())
+                    .orElseThrow(() -> {
+                        String errorMsg = "Project not found; ID: " + testtoProjectDTO.getTestId();
+                        logService.logError(errorMsg);
+                        return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                    });
+        } catch (RuntimeException e) {
+            logService.logError("Service error dfdsfsdf");
+            // İşlemi yapmadan önce kullanıcı detaylarını ekle
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+            return new UserResponse(userDetails); // Hata ile geri dön
+        }
+
+
+
+        // İlişki oluşturma işlemi
+        for (Long testId : testIds) {
+
+
+
+            Test test;
+            try {/*
+                user = userRepository.findById(userId)
+                        .orElseThrow(() -> {
+                            String errorMsg = "User not found; ID: " + userId;
+                            logService.logError(errorMsg);
+                            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + errorMsg));
+                            return new RuntimeException(errorMsg);
+                        });*/
+
+                Optional<Test> optionalTest = testRepository.findById(testId);
+                System.out.println(optionalTest);
+                test = findByIdAndHandleError(optionalTest, testId, "Test", userDetails);
+
+            } catch (RuntimeException e) {
+                logService.logError("Service error test");
+                //userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+                //return new UserResponse(userDetails);
+                continue;
+            }
+
+            Optional<TesttoProject> existingRelation = testToProjectRepository.findByProjectAndTest(project,test);
+
+            if (existingRelation.isPresent()) {
+                logService.logError("Duplicate entry and test for project ");
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Duplicate entry for project " + project.getName() + " and test" + test.getId()));
+                continue;
+            }
+
+
+            TesttoProject ref = new TesttoProject();
+            ref.setTest(test);
+            ref.setProject(project);
+            logService.logInfo("Test assigned to Project successfully");
+
+
+
+            UserResponse response = GenericServiceHelper.saveEntity(ref, testToProjectRepository,
+                    "Test assigned to project successfully", userDetails);
+        }
+        return new UserResponse(userDetails);
+    }
+
 
 }

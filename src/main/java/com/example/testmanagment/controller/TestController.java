@@ -1,7 +1,9 @@
 package com.example.testmanagment.controller;
 
 
+import com.example.testmanagment.dto.ProjecttoUserDTO;
 import com.example.testmanagment.dto.TestDto;
+import com.example.testmanagment.dto.TesttoProjectDTO;
 import com.example.testmanagment.model.Project;
 import com.example.testmanagment.model.Test;
 import com.example.testmanagment.model.UserResponse;
@@ -83,6 +85,19 @@ public class TestController {
     public Optional<Test> getTestById(@PathVariable Long id, @RequestHeader("Authorization") String authorization) {
         validateTokenProject(authorization);
         return testService.getTestById(id);
+    }
+
+
+    @PostMapping("/assign-test") // Uygun Endpoint
+    public ResponseEntity<UserResponse> assignUserToProject(
+            @RequestBody TesttoProjectDTO testtoProjectDTO,
+            @RequestHeader("Authorization") String authorization) {
+
+        validateTokenProject(authorization); // Token kontrolü
+
+        UserResponse response = testService.assignTTP(testtoProjectDTO); // Servisteki metodu çağır
+
+        return ResponseEntity.ok(response); // Başarı yanıtı döndür
     }
 
 }

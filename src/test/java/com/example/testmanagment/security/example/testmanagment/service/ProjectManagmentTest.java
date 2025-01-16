@@ -14,6 +14,8 @@ import org.mockito.Mock;
 import com.example.testmanagment.model.UserResponse;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -136,5 +138,61 @@ public class ProjectManagmentTest {
         // Projenin kaydedildiğine dair kontrol
         verify(projectRepository).save(existingProject); // Proje kaydedilmiş olmalı
     }
+    @Test
+    public void testGetAllProjects() {
+        // Veritabanındaki örnek veriler
+        Project project1 = new Project(); // Project sınıfını uygun şekilde başlatın
+        project1.setId(1L); // Örnekte bir ID veriyoruz
+        project1.setName("Project 1");
 
+        Project project2 = new Project();
+        project2.setId(2L);
+        project2.setName("Project 2");
+
+        List<Project> projectList = Arrays.asList(project1, project2);
+
+        // Mock davranışları belirleme
+        when(projectRepository.findAll()).thenReturn(projectList);
+
+        // Servisin metodunu çağır ve sonucu kontrol et
+        List<Project> result = projectService.getAllProjects();
+
+        // Sonuçların beklenenlerle uyuşup uyuşmadığını kontrol et
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals("Project 1", result.get(0).getName());
+        assertEquals("Project 2", result.get(1).getName());
+    }
+
+    @Test
+    public void testGetProjectById_Found() {
+        Long projectId = 1L;
+        Project project = new Project(); // Project sınıfını uygun şekilde başlatın
+        project.setId(projectId);
+        project.setName("Project 1");
+
+        // Mock davranışları belirleme
+        when(projectRepository.findById(projectId)).thenReturn(Optional.of(project));
+
+        // Servisin metodunu çağır ve sonucu kontrol et
+        Optional<Project> result = projectService.getProjectById(projectId);
+
+        // Sonuçların beklenenlerle uyuşup uyuşmadığını kontrol et
+        assertTrue(result.isPresent());
+        assertEquals("Project 1", result.get().getName());
+    }
+
+    @Test
+    public void testGetProjectById_NotFound() {
+        Long projectId = 2L;
+
+        // Mock davranışları belirleme
+        when(projectRepository.findById(projectId)).thenReturn(Optional.empty());
+
+        // Servisin metodunu çağır ve sonucu kontrol et
+        Optional<Project> result = projectService.getProjectById(projectId);
+
+        // Sonuçların beklenenlerle uyuşup uyuşmadığını kontrol et
+        assertFalse(result.isPresent());
+    }
 }

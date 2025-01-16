@@ -269,7 +269,7 @@ public class TestService {
                     .orElseThrow(() -> {
                         String errorMsg = "Project not found; ID: " + testtoProjectDTO.getProjectid();
                         logService.logError(errorMsg);
-                        return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                        return new RuntimeException(errorMsg);
                     });
         } catch (RuntimeException e) {
             logService.logError("Service error");
@@ -288,7 +288,7 @@ public class TestService {
                         .orElseThrow(() -> {
                             String errorMsg = "Test not found; ID: " + testId;
                             logService.logError(errorMsg);
-                            return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                            return new RuntimeException(errorMsg);
                         });
             } catch (RuntimeException e) {
                 logService.logError("Service error");

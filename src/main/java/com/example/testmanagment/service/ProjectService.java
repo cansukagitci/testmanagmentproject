@@ -465,5 +465,14 @@ public class ProjectService {
 
         return new UserResponse(userDetails);
     }
+    /////////////////////////////////////////////////////////////////
 
+
+    public List<Project> getDeletedProjects() {
+        return projectRepository.findByIsdeleted(true);
+    }
+
+    public List<Project> getActiveProjects() {
+        return projectRepository.findByIsdeletedFalse();
+    }
 }

@@ -224,7 +224,7 @@ public class TestService {
                         });*/
 
                 Optional<Test> optionalTest = testRepository.findById(testId);
-                System.out.println(optionalTest);
+
                 test = findByIdAndHandleError(optionalTest, testId, "Test", userDetails);
 
             } catch (RuntimeException e) {
@@ -314,6 +314,16 @@ public class TestService {
         }
 
         return new UserResponse(userDetails);
+    }
+
+    //////////////////////////////////////////
+
+    public List<Test> getDeletedTests() {
+        return testRepository.findByIsdeleted(true);
+    }
+
+    public List<Test> getActiveTests() {
+        return testRepository.findByIsdeletedFalse();
     }
 
 }

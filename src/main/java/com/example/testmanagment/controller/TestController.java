@@ -108,4 +108,17 @@ public class TestController {
         return ResponseEntity.ok(response);
     }
 
+    ///////////////////////
+    @GetMapping("/deleted-tests")
+    public List<Test> getDeletedTests(@RequestHeader("Authorization") String authorization) {
+        validateTokenProject(authorization);
+        return testService.getDeletedTests();
+    }
+
+    @GetMapping("/active-tests")
+    public List<Test> getActiveTests(@RequestHeader("Authorization") String authorization) {
+        validateTokenProject(authorization);
+        return  testService.getActiveTests();
+    }
+
 }

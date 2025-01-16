@@ -140,4 +140,18 @@ public class ProjectController {
         return ResponseEntity.ok(response);
     }
 
+
+    ///////////////////////
+    @GetMapping("/deleted-projects")
+    public List<Project> getDeletedProjects(@RequestHeader("Authorization") String authorization) {
+        validateTokenProject(authorization);
+        return projectService.getDeletedProjects();
+    }
+
+    @GetMapping("/active-projects")
+    public List<Project> getActiveProjects(@RequestHeader("Authorization") String authorization) {
+        validateTokenProject(authorization);
+        return projectService.getActiveProjects();
+    }
+
 }

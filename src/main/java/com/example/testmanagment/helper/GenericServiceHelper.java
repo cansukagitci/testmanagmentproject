@@ -1,9 +1,13 @@
 package com.example.testmanagment.helper;
 
+import com.example.testmanagment.model.Label;
+import com.example.testmanagment.model.Project;
+import com.example.testmanagment.model.ProjecttoLabel;
 import com.example.testmanagment.model.UserResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class GenericServiceHelper {
     public static <T> UserResponse saveEntity(T entity, JpaRepository<T, Long> repository, String successMessage, List<UserResponse.UserDetail> userDetails) {
@@ -15,4 +19,5 @@ public class GenericServiceHelper {
         }
         return new UserResponse(userDetails);
     }
+
 }

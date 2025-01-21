@@ -18,17 +18,17 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS tests (
-    id INT AUTO_INCREMENT PRIMARY KEY,                       -- Test kimliği
-    pre_condition TEXT,                                     -- Ön koşul bilgisi
-    test_input TEXT,                                       -- Test girişi
-    assumptions TEXT,                                      -- Varsayımlar
-    test_item VARCHAR(255),                                 -- Test öğesi
-    expected_test_result TEXT,                              -- Beklenen test sonucu
-    description TEXT,                                      -- Açıklama
-    result TEXT,                                           -- Test sonucu
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,        -- Oluşturulma tarihi
-    isdeleted TINYINT DEFAULT 0,                             -- Silinmiş olup olmadığı bilgisi (0 veya 1)
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Güncellenme tarihi
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pre_condition TEXT,
+    test_input TEXT,
+    assumptions TEXT,
+    test_item VARCHAR(255),
+    expected_test_result TEXT,
+    description TEXT,
+    result TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    isdeleted TINYINT DEFAULT 0,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS projectlabels (

@@ -2,6 +2,8 @@ package com.example.testmanagment.controller;
 
 import com.example.testmanagment.dto.IssuesDTO;
 
+import com.example.testmanagment.dto.IssuetoLabelDTO;
+import com.example.testmanagment.dto.TesttoProjectDTO;
 import com.example.testmanagment.model.Issues;
 
 import com.example.testmanagment.model.UserResponse;
@@ -79,5 +81,18 @@ public class IssueController {
         validateTokenIssues(authorization);
         UserResponse response = issuesService.updateIssue(id,updateIssue);
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/assign-label-issue") // Uygun Endpoint
+    public ResponseEntity<UserResponse> assignIssueToLabel(
+            @RequestBody IssuetoLabelDTO issuetoLabelDTO,
+            @RequestHeader("Authorization") String authorization) {
+
+        validateTokenIssues(authorization); // Token kontrolü
+
+        UserResponse response = issuesService.assignITL(issuetoLabelDTO);
+
+
+        return ResponseEntity.ok(response); // Başarı yanıtı döndür
     }
 }

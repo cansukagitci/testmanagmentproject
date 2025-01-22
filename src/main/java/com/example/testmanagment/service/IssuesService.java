@@ -1,15 +1,12 @@
 package com.example.testmanagment.service;
 
 import com.example.testmanagment.dto.IssuesDTO;
+import com.example.testmanagment.dto.IssuetoLabelDTO;
 import com.example.testmanagment.dto.TestDto;
+import com.example.testmanagment.dto.TesttoProjectDTO;
 import com.example.testmanagment.helper.GenericServiceHelper;
-import com.example.testmanagment.model.Issues;
-import com.example.testmanagment.model.Test;
-import com.example.testmanagment.model.UserResponse;
-import com.example.testmanagment.repository.IssuesRepository;
-import com.example.testmanagment.repository.ProjectRepository;
-import com.example.testmanagment.repository.TestRepository;
-import com.example.testmanagment.repository.TesttoProjectRepository;
+import com.example.testmanagment.model.*;
+import com.example.testmanagment.repository.*;
 import com.example.testmanagment.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +19,12 @@ import java.util.Optional;
 public class IssuesService {
     @Autowired
     public IssuesRepository issuesRepository;
+
+    @Autowired
+    private LabelRepository labelRepository;
+
+    @Autowired
+    private IssuetoLabelRepository issuetoLabelRepository;
 
     //define jwt
     @Autowired
@@ -54,7 +57,7 @@ public class IssuesService {
         issue.setIssue_item(issueDto.getIssue_item());
         issue.setDue_date(issueDto.getDue_date());
 
-        issue.setIs_deleted(true);
+        issue.setIs_deleted(false);
 
 
         logService.logInfo("Issue added successfully: " + issue);
@@ -162,5 +165,72 @@ public class IssuesService {
         return new UserResponse(userDetails);
 
     }
+
+
+    //////////////////////////////////////////////////////
+
+    public UserResponse assignITL(IssuetoLabelDTO issuetoLabelDTO) {
+
+        List<Long> issueIds = issuetoLabelDTO.getLabelId();
+        List<UserResponse.UserDetail> userDetails = new ArrayList<>();
+        List<Long> labelIds = issuetoLabelDTO.getLabelId();
+
+
+
+        Issues issue;
+        try {
+            issue = issuesRepository.findById(issuetoLabelDTO.getIssue_Id())
+                    .orElseThrow(() -> {
+                        String errorMsg = "Issue not found; ID: " + issuetoLabelDTO.getIssue_Id();
+                        logService.logError(errorMsg);
+                        return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                    });
+        } catch (RuntimeException e) {
+            logService.logError("Service error dfdsfsdf");
+            // İşlemi yapmadan önce kullanıcı detaylarını ekle
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+            return new UserResponse(userDetails); // Hata ile geri dön
+        }
+
+
+
+        // İlişki oluşturma işlemi
+        // İlişki oluşturma işlemi
+        for (Long labelId : labelIds) {
+            Label label;
+            try {
+                label = labelRepository.findById(labelId)
+                        .orElseThrow(() -> {
+                            String errorMsg = "Label not found; ID: " + labelId;
+                            logService.logError(errorMsg);
+                            return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                        });
+            } catch (RuntimeException e) {
+                logService.logError("Service error");
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+                return new UserResponse(userDetails); // Hata ile geri dön
+            }
+            Optional<IssuetoLabel> existingRelation = issuetoLabelRepository.findByIssueAndLabel(issue,label);
+
+            if (existingRelation.isPresent()) {
+                logService.logError("Duplicate entry ");
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Duplicate entry for issue " + issue.getId() + " and label" + label.getId()));
+                continue;
+            }
+
+
+            IssuetoLabel ref = new IssuetoLabel();
+            ref.setIssue(issue);
+            ref.setLabel(label);
+            logService.logInfo("Label assigned to Issue successfully");
+
+
+
+            UserResponse response = GenericServiceHelper.saveEntity(ref, issuetoLabelRepository,
+                    "Test assigned to project successfully", userDetails);
+        }
+        return new UserResponse(userDetails);
+    }
+
 
 }

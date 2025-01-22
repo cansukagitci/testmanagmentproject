@@ -326,4 +326,27 @@ public class TestService {
         return testRepository.findByIsdeletedFalse();
     }
 
+
+    public double calculateSuccessRate() {
+        long passedTests = testRepository.countPassedTests();
+        long totalTests = testRepository.countTotalTests();
+
+        if (totalTests == 0) {
+            return 0;
+        }
+
+        return (double) passedTests / totalTests * 100; // Yüzde olarak başarı oranı
+    }
+
+    public double calculateFailedRate() {
+        long failedTests = testRepository.countFiledTests();
+        long totalTests = testRepository.countTotalTests();
+
+        if (totalTests == 0) {
+            return 0;
+        }
+
+        return (double) failedTests / totalTests * 100; //
+    }
+
 }

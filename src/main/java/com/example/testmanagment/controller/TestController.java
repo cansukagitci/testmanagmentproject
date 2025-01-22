@@ -121,4 +121,15 @@ public class TestController {
         return  testService.getActiveTests();
     }
 
+
+    @GetMapping("/success-rate")
+    public double getSuccessRate() {
+        return testService.calculateSuccessRate();
+    }
+
+    @GetMapping("/failed-rate")
+    public double getFailedRate() {
+        return testService.calculateFailedRate();
+    }
+
 }

@@ -116,4 +116,11 @@ public class IssueController {
 
         return ResponseEntity.ok(response); // Başarı yanıtı döndür
     }
+
+    @DeleteMapping("/unassign-user-issue")
+    public ResponseEntity<UserResponse> removeUsers(@RequestBody IssuetoUserDTO issuetoUserDTO,@RequestHeader("Authorization") String authorization) {
+        validateTokenIssues(authorization);
+        UserResponse response = issuesService.removeITU(issuetoUserDTO);
+        return ResponseEntity.ok(response);
+    }
 }

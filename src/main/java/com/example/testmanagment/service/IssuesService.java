@@ -359,4 +359,66 @@ public class IssuesService {
         }
         return new UserResponse(userDetails);
     }
+    ////////////////////////////////////////////
+    public UserResponse removeITU(IssuetoUserDTO issuetoUserDTO) {
+        List<Long> userIds=issuetoUserDTO.getUserId();
+
+        List<UserResponse.UserDetail> userDetails = new ArrayList<>();
+
+
+        Issues issue;
+        try {
+            issue = issuesRepository.findById(issuetoUserDTO.getIssue_Id())
+                    .orElseThrow(() -> {
+                        String errorMsg = "Issue not found; ID: " + issuetoUserDTO.getIssue_Id();
+                        logService.logError(errorMsg);
+                        return new RuntimeException(errorMsg);
+                    });
+        } catch (RuntimeException e) {
+            logService.logError("Service error");
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+            return new UserResponse(userDetails); // Hata ile geri dön
+        }
+
+
+
+        for (Long userId : userIds)
+        {
+
+
+
+            User user;
+            try {
+                user = userRepository.findById(userId)
+                        .orElseThrow(() -> {
+                            String errorMsg = "User not found; ID: " + userId;
+                            logService.logError(errorMsg);
+                            return new RuntimeException(errorMsg);
+                        });
+            } catch (RuntimeException e) {
+                logService.logError("Service error");
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+                return new UserResponse(userDetails); // Hata ile geri dön
+            }
+
+
+            Optional<IssuetoUser> existingRelation =issuetoUserRepository.findByIssueAndUser(issue,user);
+
+            if (existingRelation.isPresent()) {
+
+                issuetoUserRepository.delete(existingRelation.get());
+                logService.logInfo("user removed from issue successfully");
+
+                userDetails.add(new UserResponse.UserDetail(0, true, "SERVICE_RESPONSE_SUCCESS: User removed from issue " + user.getUsername()));
+
+
+            } else {
+                logService.logError("No existing relation for issue: " + issue.getIssue_item() + " and user: " + user.getUsername());
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: No relation found for issue "+ " and user " + user.getUsername()));
+            }
+        }
+
+        return new UserResponse(userDetails);
+    }
+
 }

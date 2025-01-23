@@ -1,9 +1,6 @@
 package com.example.testmanagment.service;
 
-import com.example.testmanagment.dto.IssuesDTO;
-import com.example.testmanagment.dto.IssuetoLabelDTO;
-import com.example.testmanagment.dto.TestDto;
-import com.example.testmanagment.dto.TesttoProjectDTO;
+import com.example.testmanagment.dto.*;
 import com.example.testmanagment.helper.GenericServiceHelper;
 import com.example.testmanagment.model.*;
 import com.example.testmanagment.repository.*;
@@ -26,12 +23,18 @@ public class IssuesService {
     @Autowired
     private IssuetoLabelRepository issuetoLabelRepository;
 
+    @Autowired
+    private IssuetoUserRepository issuetoUserRepository;
+
     //define jwt
     @Autowired
     private JwtUtil jwtUtil;
 
     @Autowired
     private LogService logService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     //show error message
     private void addError(List<UserResponse.UserDetail> userDetails, String message) {
@@ -171,7 +174,7 @@ public class IssuesService {
 
     public UserResponse assignITL(IssuetoLabelDTO issuetoLabelDTO) {
 
-        List<Long> issueIds = issuetoLabelDTO.getLabelId();
+
         List<UserResponse.UserDetail> userDetails = new ArrayList<>();
         List<Long> labelIds = issuetoLabelDTO.getLabelId();
 
@@ -293,5 +296,67 @@ public class IssuesService {
         return new UserResponse(userDetails);
     }
 
+    public UserResponse assignITU(IssuetoUserDTO issuetoUserDTO) {
 
+
+        List<UserResponse.UserDetail> userDetails = new ArrayList<>();
+        List<Long> userIds = issuetoUserDTO.getUserId();
+
+
+
+        Issues issue;
+        try {
+            issue = issuesRepository.findById(issuetoUserDTO.getIssue_Id())
+                    .orElseThrow(() -> {
+                        String errorMsg = "Issue not found; ID: " + issuetoUserDTO.getIssue_Id();
+                        logService.logError(errorMsg);
+                        return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                    });
+        } catch (RuntimeException e) {
+            logService.logError("Service error dfdsfsdf");
+            // İşlemi yapmadan önce kullanıcı detaylarını ekle
+            userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+            return new UserResponse(userDetails); // Hata ile geri dön
+        }
+
+
+
+        // İlişki oluşturma işlemi
+        // İlişki oluşturma işlemi
+        for (Long userId : userIds) {
+
+            User user;
+            try {
+                user = userRepository.findById(userId)
+                        .orElseThrow(() -> {
+                            String errorMsg = "User not found; ID: " + userId;
+                            logService.logError(errorMsg);
+                            return new RuntimeException(errorMsg); // Hata durumu için bir istisna fırlat
+                        });
+            } catch (RuntimeException e) {
+                logService.logError("Service error");
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: " + e.getMessage()));
+                return new UserResponse(userDetails); // Hata ile geri dön
+            }
+            Optional<IssuetoUser> existingRelation = issuetoUserRepository.findByIssueAndUser(issue,user);
+
+            if (existingRelation.isPresent()) {
+                logService.logError("Duplicate entry ");
+                userDetails.add(new UserResponse.UserDetail(0, false, "SERVICE_RESPONSE_FAILURE: Duplicate entry for issue " + issue.getId() + " and user" + user.getId()));
+                continue;
+            }
+
+
+            IssuetoUser ref = new IssuetoUser();
+            ref.setIssue(issue);
+            ref.setUser(user);
+            logService.logInfo("User assigned to Issue successfully");
+
+
+
+            UserResponse response = GenericServiceHelper.saveEntity(ref, issuetoUserRepository,
+                    "User assigned to issue successfully", userDetails);
+        }
+        return new UserResponse(userDetails);
+    }
 }

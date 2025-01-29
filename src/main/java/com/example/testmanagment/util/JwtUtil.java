@@ -20,7 +20,7 @@ import java.util.Map;
 public class JwtUtil {
   //  private String SECRET_KEY="secret";
     private SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    private long expirationTime=300000;
+    private long expirationTime=200000;
 
 
     //token oluşturma
